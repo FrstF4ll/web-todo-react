@@ -34,3 +34,8 @@ section {
 .flex-column {
   flex-direction: column;
 }
+
+#heading {
+  padding: 30px;
+  align-items: center;
+}
