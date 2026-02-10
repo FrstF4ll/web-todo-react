@@ -3,7 +3,7 @@ import { TodoInputs } from './Todos';
 
 const Title = () => {
   return (
-    <header className="heading">
+    <header id="heading" className='flex-column'>
       <h1>Welcome</h1>
       <p className="status-message">Status message</p>
     </header>
