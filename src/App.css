@@ -20,6 +20,7 @@ main {
 section {
   grid-column: 3;
   width: fit-content;
+  padding: 20px;
 }
 
 .flex-row,
@@ -38,4 +39,14 @@ section {
 #heading {
   padding: 30px;
   align-items: center;
+}
+
+#todo-inputs {
+  gap: 20px;
+}
+
+#date-title-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
 }
