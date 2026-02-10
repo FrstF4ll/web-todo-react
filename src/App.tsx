@@ -1,11 +1,17 @@
 import './App.css';
+import { TodoInputs } from './Todos';
 
 const App = () => {
   return (
-    <div className="content">
-      <h1>Rsbuild with React</h1>
-      <p>Start building amazing things with Rsbuild.</p>
-    </div>
+    <main>
+      <section className='flex-column'>
+        <header className='heading'>
+          <h1>Welcome</h1>
+          <p className='status-message'>Status message</p>
+        </header>
+        <TodoInputs/>
+      </section>
+    </main>
   );
 };
 
