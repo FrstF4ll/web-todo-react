@@ -17,8 +17,9 @@ main {
   grid-template-rows: repeat(3, auto);
 }
 
-main > * {
+section {
   grid-column: 3;
+  width: fit-content;
 }
 
 .flex-row,
