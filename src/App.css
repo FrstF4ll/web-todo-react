@@ -17,7 +17,7 @@ main {
   grid-template-rows: repeat(3, auto);
 }
 
-section {
+#main-menu {
   grid-column: 3;
   width: fit-content;
   padding: 20px;

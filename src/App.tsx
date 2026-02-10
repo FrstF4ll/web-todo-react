@@ -13,7 +13,7 @@ const Title = () => {
 const App = () => {
   return (
     <main>
-      <section className="flex-column">
+      <section id="main-menu" className="flex-column">
         <Title />
         <TodoInputs />
       </section>
