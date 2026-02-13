@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 const TodoInputs = () => {
   return (
     <>
@@ -11,7 +13,12 @@ const TodoInputs = () => {
   );
 };
 
-export const TodoList = () => <ul id="todo-list"></ul>;
+export const TodoList = ({ children }: { children: ReactNode }) => (
+  <ul id="todo-list">{children}</ul>
+);
+export const TodoItems = ({ title }: { title: string }) => (
+  <li className="todo-item">{title}</li>
+);
 export const TodoInputsLayout = () => {
   return (
     <form id="todo-inputs" className="flex-column">

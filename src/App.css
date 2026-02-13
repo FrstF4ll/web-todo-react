@@ -55,6 +55,12 @@ main {
 #todo-list {
   grid-column: 3;
   grid-row: 2;
+  list-style: none;
   height: 50vh;
   background-color: grey;
+}
+
+.todo-item {
+  background-color: gold;
+  border: solid;
 }

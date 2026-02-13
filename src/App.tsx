@@ -1,5 +1,5 @@
 import './App.css';
-import { TodoInputsLayout, TodoList } from './Todos';
+import { TodoInputsLayout, TodoItems, TodoList } from './Todos';
 
 const Title = () => {
   return (
@@ -17,7 +17,11 @@ const App = () => {
         <Title />
         <TodoInputsLayout />
       </section>
-      <TodoList />
+      <TodoList>
+        <TodoItems title="Buy milk" />
+        <TodoItems title="Finish React project" />
+        <TodoItems title="Walk the dog" />{' '}
+      </TodoList>
     </main>
   );
 };
