@@ -16,24 +16,38 @@ const TodoInputs = () => {
 export const TodoList = ({ children }: { children: ReactNode }) => (
   <ul id="todo-list">{children}</ul>
 );
-export const TodoItems = ({ title, dueDate}: { title: string, dueDate?: string }) => {
 
-  if(!dueDate){
-    dueDate = "No due date"
+export const OptionBar = () => (
+  <nav id="option-bar" className="flex-row">
+    <div>Filter</div>
+    <button>Clear all</button>
+  </nav>
+);
+
+export const TodoItems = ({
+  title,
+  dueDate,
+}: {
+  title: string;
+  dueDate?: string;
+}) => {
+  if (!dueDate) {
+    dueDate = 'No due date';
   }
 
   return (
-  <li className="todo-item flex-row">
-    <span>
-      <input type="checkbox" />
-      {title}
-    </span>
-    <span>
-      {dueDate}<button>X</button>
-    </span>
-  </li>
-);
-}
+    <li className="todo-item flex-row">
+      <span>
+        <input type="checkbox" />
+        {title}
+      </span>
+      <span>
+        {dueDate}
+        <button>X</button>
+      </span>
+    </li>
+  );
+};
 export const TodoInputsLayout = () => {
   return (
     <form id="todo-inputs" className="flex-column">

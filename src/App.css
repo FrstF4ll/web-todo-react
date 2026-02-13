@@ -54,7 +54,7 @@ main {
 
 #todo-list {
   grid-column: 3;
-  grid-row: 2;
+  grid-row: 3;
   list-style: none;
   height: 50vh;
   background-color: grey;
@@ -69,4 +69,11 @@ main {
 .todo-item > span {
   display: flex;
   gap: 15px;
+}
+
+#option-bar {
+  grid-column: 3;
+  grid-row: 2;
+  background-color: yellowgreen;
+  justify-content: space-between;
 }
