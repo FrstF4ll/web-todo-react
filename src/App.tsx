@@ -1,5 +1,5 @@
 import './App.css';
-import { TodoInputs } from './Todos';
+import { TodoInputsLayout } from './Todos';
 
 const Title = () => {
   return (
@@ -15,7 +15,7 @@ const App = () => {
     <main>
       <section id="main-menu" className="flex-column">
         <Title />
-        <TodoInputs />
+        <TodoInputsLayout />
       </section>
     </main>
   );
