@@ -63,4 +63,10 @@ main {
 .todo-item {
   background-color: gold;
   border: solid;
+  justify-content: space-between;
+}
+
+.todo-item > span {
+  display: flex;
+  gap: 15px;
 }

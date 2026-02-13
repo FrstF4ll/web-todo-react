@@ -20,7 +20,7 @@ const App = () => {
       <TodoList>
         <TodoItems title="Buy milk" />
         <TodoItems title="Finish React project" />
-        <TodoItems title="Walk the dog" />{' '}
+        <TodoItems title="Walk the dog" />
       </TodoList>
     </main>
   );
