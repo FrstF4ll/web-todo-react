@@ -5,9 +5,7 @@
 
 body {
   margin: 0;
-  color: #fff;
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  background-image: linear-gradient(to bottom, #020917, #101725);
   height: 100vh;
 }
 
@@ -15,6 +13,7 @@ main {
   display: grid;
   grid-template-columns: repeat(5, auto);
   grid-template-rows: repeat(3, auto);
+  row-gap: 10px;
 }
 
 #main-menu {
@@ -22,6 +21,16 @@ main {
   width: fit-content;
   padding: 20px;
   justify-self: center;
+  color: #fff;
+  background-image: linear-gradient(to bottom, #020917, #101725);
+}
+
+#option-bar {
+  grid-column: 3;
+  grid-row: 2;
+  padding: 15px;
+  background-color: yellowgreen;
+  justify-content: space-between;
 }
 
 .flex-row,
@@ -53,6 +62,7 @@ main {
 }
 
 #todo-list {
+  gap: 10px;
   grid-column: 3;
   grid-row: 3;
   list-style: none;
@@ -64,6 +74,7 @@ main {
   background-color: gold;
   border: solid;
   justify-content: space-between;
+  padding: 10px;
 }
 
 .todo-item > span {
@@ -71,9 +82,8 @@ main {
   gap: 15px;
 }
 
-#option-bar {
-  grid-column: 3;
-  grid-row: 2;
-  background-color: yellowgreen;
-  justify-content: space-between;
+.danger-button {
+  background-color: red;
+  height: auto;
+  padding: 5px;
 }

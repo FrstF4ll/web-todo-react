@@ -13,14 +13,20 @@ const TodoInputs = () => {
   );
 };
 
+const DangerButton = ({ placeholder }: { placeholder: string }) => (
+  <button className="danger-button">{placeholder}</button>
+);
+
 export const TodoList = ({ children }: { children: ReactNode }) => (
-  <ul id="todo-list">{children}</ul>
+  <ul id="todo-list" className="flex-column">
+    {children}
+  </ul>
 );
 
 export const OptionBar = () => (
   <nav id="option-bar" className="flex-row">
     <div>Filter</div>
-    <button>Clear all</button>
+    <DangerButton placeholder="Clear all" />
   </nav>
 );
 
@@ -43,7 +49,7 @@ export const TodoItems = ({
       </span>
       <span>
         {dueDate}
-        <button>X</button>
+        <DangerButton placeholder="X" />
       </span>
     </li>
   );
