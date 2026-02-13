@@ -21,6 +21,7 @@ main {
   grid-column: 3;
   width: fit-content;
   padding: 20px;
+  justify-self: center;
 }
 
 .flex-row,
