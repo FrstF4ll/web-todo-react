@@ -16,18 +16,24 @@ const TodoInputs = () => {
 export const TodoList = ({ children }: { children: ReactNode }) => (
   <ul id="todo-list">{children}</ul>
 );
-export const TodoItems = ({ title }: { title: string }) => (
+export const TodoItems = ({ title, dueDate}: { title: string, dueDate?: string }) => {
+
+  if(!dueDate){
+    dueDate = "No due date"
+  }
+
+  return (
   <li className="todo-item flex-row">
     <span>
       <input type="checkbox" />
       {title}
     </span>
     <span>
-      Date input<button>X</button>
+      {dueDate}<button>X</button>
     </span>
   </li>
 );
-
+}
 export const TodoInputsLayout = () => {
   return (
     <form id="todo-inputs" className="flex-column">
