@@ -51,3 +51,10 @@ main {
   gap: 20px;
   justify-content: space-around;
 }
+
+#todo-list {
+  grid-column: 3;
+  grid-row: 2;
+  height: 50vh;
+  background-color: grey;
+}

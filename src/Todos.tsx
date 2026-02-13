@@ -11,6 +11,7 @@ const TodoInputs = () => {
   );
 };
 
+export const TodoList = () => <ul id="todo-list"></ul>;
 export const TodoInputsLayout = () => {
   return (
     <form id="todo-inputs" className="flex-column">
