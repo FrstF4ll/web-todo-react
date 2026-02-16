@@ -8,7 +8,9 @@ const TodoInputs = () => {
         <input type="date" />
       </div>
       <textarea placeholder="Enter a description..." />
-      <button type="button" id="add-todo">Add to list</button>
+      <button type="button" id="add-todo">
+        Add to list
+      </button>
     </>
   );
 };
