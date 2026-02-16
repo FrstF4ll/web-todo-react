@@ -21,9 +21,7 @@ const App = () => {
       </section>
       <OptionBar />
       <TodoList>
-        <TodoItems title="Buy milk" />
-        <TodoItems title="Finish React project" />
-        <TodoItems title="Walk the dog" dueDate="15.11.2027" />
+        <TodoItems />
       </TodoList>
     </main>
   );
