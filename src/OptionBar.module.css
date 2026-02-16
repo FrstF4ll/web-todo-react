@@ -1,0 +1,9 @@
+.optionBar {
+  grid-column: 3;
+  grid-row: 2;
+  padding: 15px;
+  background-color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+}

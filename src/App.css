@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -11,36 +12,21 @@ body {
   color: #1f2937;
 }
 
-main {
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-template-rows: repeat(3, auto);
-  row-gap: 10px;
+input,
+textarea {
+  background-color: #f9fafb;
+  color: #111827;
+  border: solid 1px #e5e7eb;
+  padding: 3px;
 }
 
-#main-menu {
-  grid-column: 3;
-  width: fit-content;
-  padding: 20px;
-  justify-self: center;
-  background-color: #ffffff;
-  border-radius: 40px;
+button {
+  cursor: pointer;
 }
 
-#add-todo {
-  border: none;
-  background-color: #111827;
-  color: whitesmoke;
-}
-
-#option-bar {
-  grid-column: 3;
-  grid-row: 2;
-  padding: 15px;
-  background-color: #ffffff;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 15px;
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0px #111827;
 }
 
 .flex-row,
@@ -56,53 +42,11 @@ main {
   flex-direction: column;
 }
 
-#heading {
-  padding: 30px;
-  align-items: center;
-}
-
-#todo-inputs {
-  gap: 20px;
-}
-
-#date-title-wrapper {
-  display: flex;
-  gap: 20px;
-  justify-content: space-around;
-}
-
-#todo-list {
-  gap: 10px;
-  grid-column: 3;
-  grid-row: 3;
-  list-style: none;
-  height: 50vh;
-  border: solid;
-  background-color: #ffffff;
-}
-
-#todo-list,
-.todo-item {
-  border-radius: 15px;
-}
-
-.todo-item {
-  background-color: #f5f5f0;
-  color: #262626;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
-
-.todo-item > * {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-button:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0px #111827;
+main {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(3, auto);
+  row-gap: 10px;
 }
 
 .danger-button {
@@ -111,12 +55,4 @@ button:active {
   height: auto;
   padding: 5px;
   border-radius: 10px;
-}
-
-input,
-textarea {
-  background-color: #f9fafb;
-  color: #111827;
-  border: solid #e5e7eb;
-  padding: 3px;
 }

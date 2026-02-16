@@ -1,0 +1,29 @@
+.mainMenu {
+  grid-column: 3;
+  width: fit-content;
+  padding: 20px;
+  justify-self: center;
+  background-color: #ffffff;
+  border-radius: 40px;
+}
+
+.heading {
+  padding: 30px;
+  align-items: center;
+}
+
+.todoInputs {
+  gap: 20px;
+}
+
+.inputWrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.addTodo {
+  border: none;
+  background-color: #111827;
+  color: whitesmoke;
+}

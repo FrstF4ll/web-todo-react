@@ -1,9 +1,9 @@
 import './App.css';
 import { OptionBar, TodoInputsLayout, TodoItems, TodoList } from './Todos';
-
+import s from './MainMenu.module.css';
 const Title = () => {
   return (
-    <header id="heading" className="flex-column">
+    <header className={`flex-column ${s.heading}`}>
       <h1>Welcome</h1>
       <p className="status-message">Status message</p>
     </header>
@@ -13,7 +13,7 @@ const Title = () => {
 const App = () => {
   return (
     <main>
-      <section id="main-menu" className="flex-column">
+      <section className={`flex-column ${s.mainMenu}`}>
         <Title />
         <TodoInputsLayout />
       </section>
