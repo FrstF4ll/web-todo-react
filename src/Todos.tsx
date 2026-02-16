@@ -1,18 +1,18 @@
 import type { ReactNode } from 'react';
 import type { TodoItemsProps } from './Interfaces';
-import s from './MainMenu.module.css';
-import optBarStyle from './OptionBar.module.css';
-import todoStyles from './TodoList.module.css';
+import mainMenuStyles from './MainMenu.module.css';
+import optionBarStyles from './OptionBar.module.css';
+import todoListStyles from './TodoList.module.css';
 
 const TodoInputs = () => {
   return (
     <>
-      <div className={s.inputWrapper}>
+      <div className={mainMenuStyles.inputWrapper}>
         <input type="text" placeholder="Enter title" />
         <input type="date" />
       </div>
       <textarea placeholder="Enter a description..." />
-      <button type="button" className={s.addTodo}>
+      <button type="button" className={mainMenuStyles.addTodo}>
         Add to list
       </button>
     </>
@@ -26,11 +26,11 @@ const DangerButton = ({ text, ...props }: { text: string }) => (
 );
 
 export const TodoList = ({ children }: { children: ReactNode }) => (
-  <ul className={`flex-column ${todoStyles.todoList}`}>{children}</ul>
+  <ul className={`flex-column ${todoListStyles.todoList}`}>{children}</ul>
 );
 
 export const OptionBar = () => (
-  <nav className={`flex-row ${optBarStyle.optionBar}`}>
+  <nav className={`flex-row ${optionBarStyles.optionBar}`}>
     <div>Filter</div>
     <DangerButton text="Clear all" aria-label="Delete everything" />
   </nav>
@@ -40,7 +40,7 @@ export const TodoItems = ({ title, dueDate }: TodoItemsProps) => {
   const displayDueDate = dueDate || 'No date';
 
   return (
-    <li className={`${todoStyles.todoItem} flex-row`}>
+    <li className={`${todoListStyles.todoItem} flex-row`}>
       <span>
         <input type="checkbox" />
         {title}
@@ -54,7 +54,7 @@ export const TodoItems = ({ title, dueDate }: TodoItemsProps) => {
 };
 export const TodoInputsLayout = () => {
   return (
-    <form className={`flex-column ${s.todoInputs}`}>
+    <form className={`flex-column ${mainMenuStyles.todoInputs}`}>
       <TodoInputs />
     </form>
   );
