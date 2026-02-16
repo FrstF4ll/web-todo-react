@@ -1,5 +1,6 @@
 import './App.css';
-import { OptionBar, TodoInputsLayout, TodoItems, TodoList } from './Todos';
+import { TodoItems, TodoList } from './Todos';
+import { OptionBar, TodoInputsLayout } from './UI';
 import s from './MainMenu.module.css';
 const Title = () => {
   return (
