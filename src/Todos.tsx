@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { TodoItemsProps } from './Interfaces';
 
 const TodoInputs = () => {
   return (
@@ -15,8 +16,8 @@ const TodoInputs = () => {
   );
 };
 
-const DangerButton = ({ placeholder }: { placeholder: string }) => (
-  <button className="danger-button">{placeholder}</button>
+const DangerButton = ({ text, ...props }: { text: string }) => (
+  <button className="danger-button" {...props}>{text}</button>
 );
 
 export const TodoList = ({ children }: { children: ReactNode }) => (
@@ -28,17 +29,14 @@ export const TodoList = ({ children }: { children: ReactNode }) => (
 export const OptionBar = () => (
   <nav id="option-bar" className="flex-row">
     <div>Filter</div>
-    <DangerButton placeholder="Clear all" />
+    <DangerButton text="Clear all"  aria-label="Delete everything"/>
   </nav>
 );
 
 export const TodoItems = ({
   title,
   dueDate,
-}: {
-  title: string;
-  dueDate?: string;
-}) => {
+}: TodoItemsProps) => {
   const displayDueDate = dueDate || "No date"
 
 
@@ -50,7 +48,7 @@ export const TodoItems = ({
       </span>
       <span>
         {displayDueDate}
-        <DangerButton placeholder="X" />
+        <DangerButton text="X" aria-label={`Delete task ${title}`} />
       </span>
     </li>
   );
