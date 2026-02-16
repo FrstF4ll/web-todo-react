@@ -39,9 +39,8 @@ export const TodoItems = ({
   title: string;
   dueDate?: string;
 }) => {
-  if (!dueDate) {
-    dueDate = 'No due date';
-  }
+  const displayDueDate = dueDate || "No date"
+
 
   return (
     <li className="todo-item flex-row">
@@ -50,7 +49,7 @@ export const TodoItems = ({
         {title}
       </span>
       <span>
-        {dueDate}
+        {displayDueDate}
         <DangerButton placeholder="X" />
       </span>
     </li>
