@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { TodoItemsProps } from './Interfaces';
 import s from './MainMenu.module.css';
 import optBarStyle from './OptionBar.module.css'
+import todoStyles from './TodoList.module.css'
 
 const TodoInputs = () => {
   return (
@@ -25,7 +26,7 @@ const DangerButton = ({ text, ...props }: { text: string }) => (
 );
 
 export const TodoList = ({ children }: { children: ReactNode }) => (
-  <ul id="todo-list" className="flex-column">
+  <ul className={`flex-column ${todoStyles.todoList}`}>
     {children}
   </ul>
 );
@@ -41,7 +42,7 @@ export const TodoItems = ({ title, dueDate }: TodoItemsProps) => {
   const displayDueDate = dueDate || 'No date';
 
   return (
-    <li className="todo-item flex-row">
+    <li className={`${todoStyles.todoItem} flex-row`}>
       <span>
         <input type="checkbox" />
         {title}
