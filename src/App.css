@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -9,6 +10,36 @@ body {
   height: 100vh;
   background-color: #f3f2ee;
   color: #1f2937;
+}
+
+input,
+textarea {
+  background-color: #f9fafb;
+  color: #111827;
+  border: solid 1px #e5e7eb;
+  padding: 3px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0px #111827;
+}
+
+.flex-row,
+.flex-column {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
 }
 
 main {
@@ -27,10 +58,52 @@ main {
   border-radius: 40px;
 }
 
+#heading {
+  padding: 30px;
+  align-items: center;
+}
+
+/* Inputs & Forms */
+#todo-inputs {
+  gap: 20px;
+}
+
+#date-title-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+}
+
 #add-todo {
   border: none;
   background-color: #111827;
   color: whitesmoke;
+}
+
+#todo-list {
+  gap: 10px;
+  grid-column: 3;
+  grid-row: 3;
+  list-style: none;
+  height: 50vh;
+  border: solid 1px;
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+.todo-item {
+  background-color: #f5f5f0;
+  color: #262626;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.todo-item > * {
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
 
 #option-bar {
@@ -43,80 +116,10 @@ main {
   border-radius: 15px;
 }
 
-.flex-row,
-.flex-column {
-  display: flex;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-#heading {
-  padding: 30px;
-  align-items: center;
-}
-
-#todo-inputs {
-  gap: 20px;
-}
-
-#date-title-wrapper {
-  display: flex;
-  gap: 20px;
-  justify-content: space-around;
-}
-
-#todo-list {
-  gap: 10px;
-  grid-column: 3;
-  grid-row: 3;
-  list-style: none;
-  height: 50vh;
-  border: solid;
-  background-color: #ffffff;
-}
-
-#todo-list,
-.todo-item {
-  border-radius: 15px;
-}
-
-.todo-item {
-  background-color: #f5f5f0;
-  color: #262626;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
-
-.todo-item > * {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-button:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0px #111827;
-}
-
 .danger-button {
   background-color: #fee2e2;
   color: #ef4444;
   height: auto;
   padding: 5px;
   border-radius: 10px;
-}
-
-input,
-textarea {
-  background-color: #f9fafb;
-  color: #111827;
-  border: solid #e5e7eb;
-  padding: 3px;
 }
