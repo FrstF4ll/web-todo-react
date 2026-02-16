@@ -2,6 +2,7 @@ import { DangerButton } from './Atom';
 
 import mainMenuStyles from './MainMenu.module.css';
 import optionBarStyles from './OptionBar.module.css';
+import './Loader.css';
 
 const TodoInputs = () => {
   return (
@@ -32,3 +33,12 @@ export const OptionBar = () => (
     <DangerButton text="Clear all" aria-label="Delete everything" />
   </nav>
 );
+
+export const Loader = () => {
+  return (
+    <div className="loader-container">
+      <div className="spinner"></div>
+      <p>Loading tasks...</p>
+    </div>
+  );
+};
