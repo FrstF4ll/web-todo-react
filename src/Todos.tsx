@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { TodoItemsProps } from './Interfaces';
 import s from './MainMenu.module.css';
+import optBarStyle from './OptionBar.module.css'
 
 const TodoInputs = () => {
   return (
@@ -30,7 +31,7 @@ export const TodoList = ({ children }: { children: ReactNode }) => (
 );
 
 export const OptionBar = () => (
-  <nav id="option-bar" className="flex-row">
+  <nav className={`flex-row ${optBarStyle.optionBar}`}>
     <div>Filter</div>
     <DangerButton text="Clear all" aria-label="Delete everything" />
   </nav>

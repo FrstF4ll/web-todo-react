@@ -75,16 +75,6 @@ main {
   align-items: center;
 }
 
-#option-bar {
-  grid-column: 3;
-  grid-row: 2;
-  padding: 15px;
-  background-color: #ffffff;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 15px;
-}
-
 .danger-button {
   background-color: #fee2e2;
   color: #ef4444;
