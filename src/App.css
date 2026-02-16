@@ -49,37 +49,6 @@ main {
   row-gap: 10px;
 }
 
-#main-menu {
-  grid-column: 3;
-  width: fit-content;
-  padding: 20px;
-  justify-self: center;
-  background-color: #ffffff;
-  border-radius: 40px;
-}
-
-#heading {
-  padding: 30px;
-  align-items: center;
-}
-
-/* Inputs & Forms */
-#todo-inputs {
-  gap: 20px;
-}
-
-#date-title-wrapper {
-  display: flex;
-  gap: 20px;
-  justify-content: space-around;
-}
-
-#add-todo {
-  border: none;
-  background-color: #111827;
-  color: whitesmoke;
-}
-
 #todo-list {
   gap: 10px;
   grid-column: 3;

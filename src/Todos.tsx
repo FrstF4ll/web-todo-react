@@ -1,15 +1,16 @@
 import type { ReactNode } from 'react';
 import type { TodoItemsProps } from './Interfaces';
+import s from './MainMenu.module.css';
 
 const TodoInputs = () => {
   return (
     <>
-      <div id="date-title-wrapper">
+      <div className={s.inputWrapper}>
         <input type="text" placeholder="Enter title" />
         <input type="date" />
       </div>
       <textarea placeholder="Enter a description..." />
-      <button type="button" id="add-todo">
+      <button type="button" className={s.addTodo}>
         Add to list
       </button>
     </>
@@ -53,7 +54,7 @@ export const TodoItems = ({ title, dueDate }: TodoItemsProps) => {
 };
 export const TodoInputsLayout = () => {
   return (
-    <form id="todo-inputs" className="flex-column">
+    <form className={`flex-column ${s.todoInputs}`}>
       <TodoInputs />
     </form>
   );
