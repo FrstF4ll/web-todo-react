@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 import type { TodoItemsProps } from './Interfaces';
 import s from './MainMenu.module.css';
-import optBarStyle from './OptionBar.module.css'
-import todoStyles from './TodoList.module.css'
+import optBarStyle from './OptionBar.module.css';
+import todoStyles from './TodoList.module.css';
 
 const TodoInputs = () => {
   return (
@@ -26,9 +26,7 @@ const DangerButton = ({ text, ...props }: { text: string }) => (
 );
 
 export const TodoList = ({ children }: { children: ReactNode }) => (
-  <ul className={`flex-column ${todoStyles.todoList}`}>
-    {children}
-  </ul>
+  <ul className={`flex-column ${todoStyles.todoList}`}>{children}</ul>
 );
 
 export const OptionBar = () => (
