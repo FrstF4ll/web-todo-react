@@ -1,6 +1,6 @@
 import { getData } from './API/GetData';
 import { use } from 'react';
-import { TodoItems } from './Todos';
+import { TodoItems } from './Todos/TodoItems';
 import type { Todos } from './Interfaces';
 import { StatusMessage } from './Atom';
 
