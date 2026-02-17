@@ -1,12 +1,10 @@
 import './App.css';
 import { TodosWrapper } from './Todos';
 import { TodoListContent } from './TodoListContent';
-import MainMenuStyles from './UI/MainMenu.module.css';
 import { Suspense } from 'react';
 import { Loader } from './UI/Loader';
-import { TodoInputsLayout } from './UI/TodoInputsLayout';
 import { OptionBar } from './UI/OptionBar';
-import { MainTitleWrapper } from './UI/MainTitleWrapper';
+import { MainMenuWrapper } from './UI/MainMenuWrapper';
 
 const TodosContainer = () => {
   return (
@@ -21,10 +19,8 @@ const TodosContainer = () => {
 const App = () => {
   return (
     <main>
-      <MainTitleWrapper />
-
+      <MainMenuWrapper />
       <OptionBar />
-
       <TodosContainer />
     </main>
   );

@@ -9,7 +9,7 @@ const Title = () => {
   );
 };
 
-export const MainTitleWrapper = () => {
+export const MainMenuWrapper = () => {
   return (
     <section className={`flex-column ${MainMenuStyles.mainMenu}`}>
       <Title />
