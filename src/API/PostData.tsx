@@ -1,6 +1,6 @@
-import type { Todos } from '../Interfaces';
+import type { ClientTodos } from '../Interfaces';
 
-export async function postData(todo: Todos) {
+export async function postData(todo: ClientTodos) {
   const response = await fetch('https://api.todos.in.jt-lab.ch:443/todos', {
     method: 'POST',
     headers: { accept: 'application/json', 'Content-Type': 'application/json' },
