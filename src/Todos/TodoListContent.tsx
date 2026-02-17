@@ -7,16 +7,15 @@ import { StatusMessage } from '../Atom';
 const todosPromise = getData();
 
 export const TodoListContent = () => {
-  const todos = use(todosPromise);
-  const isEmpty = todos.length === 0;
+  const initialTodos = use(todosPromise);
+  const isEmpty = initialTodos.length === 0;
 
   if (isEmpty) {
     return <StatusMessage statusMessage="No tasks to complete !" />;
   }
-
   return (
     <>
-      {todos.map((todo: Todos) => (
+      {initialTodos.map((todo: Todos) => (
         <TodoItems key={todo.id} source={todo} />
       ))}
     </>
