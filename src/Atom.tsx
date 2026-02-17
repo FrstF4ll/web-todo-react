@@ -3,3 +3,7 @@ export const DangerButton = ({ text, ...props }: { text: string }) => (
     {text}
   </button>
 );
+
+export const StatusMessage = ({ statusMessage }: { statusMessage: string }) => {
+  return <p>{statusMessage}</p>;
+};

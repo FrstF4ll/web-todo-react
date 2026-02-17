@@ -7,10 +7,6 @@ import MainMenuStyles from './MainMenu.module.css';
 import { Suspense } from 'react';
 import { Loader } from './UI';
 
-export const StatusMessage = ({ statusMessage }: { statusMessage: string }) => {
-  return <p>{statusMessage}</p>;
-};
-
 const Title = () => {
   return (
     <header className={`flex-column ${MainMenuStyles.heading}`}>

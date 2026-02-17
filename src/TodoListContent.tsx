@@ -2,7 +2,7 @@ import { getData } from "./Api";
 import { use } from "react";
 import { TodoItems } from "./Todos";
 import type { Todos } from "./Interfaces";
-import { StatusMessage } from "./App";
+import { StatusMessage } from "./Atom";
 
 const todosPromise = getData();
 
