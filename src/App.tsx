@@ -1,20 +1,9 @@
 import './App.css';
-import { TodosWrapper } from './Todos/Todos';
-import { TodoListContent } from './Todos/TodoListContent';
-import { Suspense } from 'react';
-import { Loader } from './UI/Loader';
+import { TodosContainer } from './Todos/TodosContainer';
 import { OptionBar } from './UI/OptionBar';
 import { MainMenuWrapper } from './UI/MainMenuWrapper';
 
-const TodosContainer = () => {
-  return (
-    <TodosWrapper>
-      <Suspense fallback={<Loader />}>
-        <TodoListContent />
-      </Suspense>
-    </TodosWrapper>
-  );
-};
+
 
 const App = () => {
   return (
