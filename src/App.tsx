@@ -3,7 +3,6 @@ import { TodosWrapper } from './Todos';
 import { TodoListContent } from './TodoListContent';
 import { OptionBar, TodoInputsLayout } from './UI';
 import MainMenuStyles from './MainMenu.module.css';
-
 import { Suspense } from 'react';
 import { Loader } from './UI';
 
