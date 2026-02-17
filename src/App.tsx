@@ -1,6 +1,6 @@
 import './App.css';
-import { TodosWrapper } from './Todos';
-import { TodoListContent } from './TodoListContent';
+import { TodosWrapper } from './Todos/Todos';
+import { TodoListContent } from './Todos/TodoListContent';
 import { Suspense } from 'react';
 import { Loader } from './UI/Loader';
 import { OptionBar } from './UI/OptionBar';

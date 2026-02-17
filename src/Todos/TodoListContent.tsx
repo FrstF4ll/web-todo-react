@@ -1,8 +1,8 @@
-import { getData } from './API/GetData';
+import { getData } from '../API/GetData';
 import { use } from 'react';
-import { TodoItems } from './Todos/TodoItems';
-import type { Todos } from './Interfaces';
-import { StatusMessage } from './Atom';
+import { TodoItems } from './TodoItems';
+import type { Todos } from '../Interfaces';
+import { StatusMessage } from '../Atom';
 
 const todosPromise = getData();
 

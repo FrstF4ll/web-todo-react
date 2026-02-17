@@ -1,4 +1,4 @@
-import todoListStyles from '../TodoList.module.css'
+import todoListStyles from './TodoList.module.css'
 import type { Todos } from '../Interfaces';
 import { DangerButton } from '../Atom';
 
