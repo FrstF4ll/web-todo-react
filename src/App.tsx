@@ -1,13 +1,13 @@
 import './App.css';
-import { TodoItems, TodosWrapper } from './Todos';
+import { TodosWrapper } from './Todos';
+import { TodoListContent } from './TodoListContent';
 import { OptionBar, TodoInputsLayout } from './UI';
 import MainMenuStyles from './MainMenu.module.css';
-import { getData } from './Api';
-import { Suspense, use } from 'react';
-import type { Todos } from './Interfaces';
+
+import { Suspense } from 'react';
 import { Loader } from './UI';
 
-const StatusMessage = ({ statusMessage }: { statusMessage: string }) => {
+export const StatusMessage = ({ statusMessage }: { statusMessage: string }) => {
   return <p>{statusMessage}</p>;
 };
 
@@ -19,30 +19,10 @@ const Title = () => {
   );
 };
 
-const todosPromise = getData();
-
-const TodoListContent = () => {
-  const todos = use(todosPromise);
-  const isEmpty = todos.length === 0;
-
-  if (isEmpty) {
-    return <StatusMessage statusMessage="No tasks to complete !" />;
-  }
-
-  return (
-    <>
-      {todos.map((todo: Todos) => (
-        <TodoItems key={todo.id} source={todo} />
-      ))}
-    </>
-  );
-};
-
 const TodosContainer = () => {
   return (
     <TodosWrapper>
       <Suspense fallback={<Loader />}>
-        {/* On appelle le composant qui contient le use() */}
         <TodoListContent />
       </Suspense>
     </TodosWrapper>
