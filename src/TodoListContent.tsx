@@ -1,4 +1,4 @@
-import { getData } from "./Api";
+import { getData } from "./API/GetData";
 import { use } from "react";
 import { TodoItems } from "./Todos";
 import type { Todos } from "./Interfaces";
