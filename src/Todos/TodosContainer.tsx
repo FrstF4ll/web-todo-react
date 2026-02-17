@@ -1,4 +1,4 @@
-import { TodosWrapper } from "./Todos";
+import { TodosWrapper } from "./TodosWrapper";
 import { Suspense } from "react";
 import { TodoListContent } from "./TodoListContent";
 import { Loader } from "../UI/Loader";
