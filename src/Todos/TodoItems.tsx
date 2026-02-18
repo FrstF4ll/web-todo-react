@@ -1,10 +1,10 @@
-import todoListStyles from './TodoList.module.css';
+import styles from './TodoList.module.css';
 import type { Todos } from '../shared/Interfaces';
-import { DangerButton } from '../Atom';
+import { DangerButton } from '../DangerButton';
 
 export const TodoItems = ({ source }: { source: Todos }) => {
   return (
-    <li className={`${todoListStyles.todoItem} flex-row`}>
+    <li className={`${styles.todoItem} flex-row`}>
       <span>
         <input type="checkbox" defaultChecked={source.done} />
         {source.title}

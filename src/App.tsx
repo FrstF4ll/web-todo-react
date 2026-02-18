@@ -2,10 +2,10 @@ import './App.css';
 import { TodosContainer } from './Todos/TodosContainer';
 import { OptionBar } from './UI/OptionBar';
 import { MainMenuWrapper } from './UI/MainMenuWrapper';
-import { AddTodoButton, TodoForm } from './UI/TodoForm';
+import { AddTodoButton } from './UI/menu/AddTodoButton';
+import { TodoForm } from './UI/TodoForm';
 import { TodoInputs } from './UI/TodoInputs';
 import { TodoTextarea } from './UI/TodoTextarea';
-
 import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
 import { postData } from './API/PostData';
@@ -14,7 +14,7 @@ import { getData } from './API/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
 import { TodoItems } from './Todos/TodoItems';
-import { StatusMessage } from './Atom';
+import { StatusMessage } from './StatusMessage';
 
 const newTodo: ClientTodos = {
   title: '',
