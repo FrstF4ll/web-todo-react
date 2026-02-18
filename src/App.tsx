@@ -43,7 +43,7 @@ const App = () => {
     });
   }
 
-  const handleClick = async () => {
+  const handleAdd = async () => {
     if (!formData.title.trim()) {
       return;
     }
@@ -82,7 +82,7 @@ const App = () => {
             value={formData.content ?? ''}
             event={handleInputChange}
           />
-          <AddTodoButton event={handleClick} />
+          <AddTodoButton event={handleAdd} />
         </TodoForm>
       </MainMenuWrapper>
       <OptionBar />
