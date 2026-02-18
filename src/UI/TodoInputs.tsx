@@ -1,15 +1,15 @@
 import mainMenuStyles from './MainMenu.module.css';
 import type { ClientTodos } from '../Interfaces';
 import { useState } from 'react';
+import { postData } from '../API/PostData';
+const newTodo: ClientTodos = {
+  title: '',
+  content: '',
+  due_date: '',
+  done: false,
+};
 
 export const TodoInputs = () => {
-  const newTodo: ClientTodos = {
-    title: '',
-    content: '',
-    due_date: '',
-    done: false,
-  };
-
   const [formData, setFormData] = useState(newTodo);
 
   function handleInputChange(
@@ -21,6 +21,10 @@ export const TodoInputs = () => {
       [name]: value,
     });
   }
+
+  const handleClick = () => {
+    postData(formData);
+  };
 
   return (
     <>
@@ -45,7 +49,11 @@ export const TodoInputs = () => {
         value={formData.content}
         onChange={handleInputChange}
       />
-      <button type="button" className={mainMenuStyles.addTodo}>
+      <button
+        type="button"
+        className={mainMenuStyles.addTodo}
+        onClick={handleClick}
+      >
         Add to list
       </button>
     </>
