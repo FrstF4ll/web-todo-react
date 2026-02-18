@@ -5,12 +5,12 @@ import { MainMenuWrapper } from './UI/MainMenuWrapper';
 import { AddTodoButton, TodoForm } from './UI/TodoForm';
 import { TodoInputs, TodoTextarea } from './UI/TodoInputs';
 import { useState } from 'react';
-import type { ClientTodos } from './Interfaces';
+import type { ClientTodos } from './shared/Interfaces';
 import { postData } from './API/PostData';
 import mainMenuStyles from './UI/MainMenu.module.css';
 import { getData } from './API/GetData';
 import { use } from 'react';
-import type { Todos } from './Interfaces';
+import type { Todos } from './shared/Interfaces';
 import { TodoItems } from './Todos/TodoItems';
 import { StatusMessage } from './Atom';
 

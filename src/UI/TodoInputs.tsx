@@ -1,4 +1,4 @@
-import type { TodoFieldProps } from '../Interfaces';
+import type { TodoFieldProps } from '../shared/Interfaces';
 
 export const TodoInputs = ({
   name,
