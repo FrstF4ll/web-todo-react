@@ -52,17 +52,12 @@ const App = () => {
     setTodos((prev: Todos[]) => [...prev, postedTodo]);
   };
 
-  const isEmpty = () => {
-    const TodoLength = todos.length === 0;
-    if (TodoLength) {
-      return <StatusMessage statusMessage="No tasks to complete !" />;
-    }
-  };
-
   return (
     <main>
       <MainMenuWrapper>
-        {isEmpty()}
+        {todos.length === 0 && (
+          <StatusMessage statusMessage="No tasks to complete !" />
+        )}
         <TodoForm>
           <div className={mainMenuStyles.inputWrapper}>
             <TodoInputs
