@@ -1,14 +1,16 @@
 import { TODO_URL } from '../shared/variable';
-
+import type { Todos } from '../shared/Interfaces';
 const queryHeader = {
   accept: 'application/json',
   'Range-Unit': 'items',
 };
 
-export async function getData() {
+export async function getData(): Promise<Todos[]> {
   const response = await fetch(TODO_URL, {
     method: 'GET',
     headers: queryHeader,
   });
-  return response.json();
+  const responseFile = await response.json();
+
+  return responseFile as Todos[];
 }
