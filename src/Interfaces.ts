@@ -15,6 +15,6 @@ export interface TodoFieldProps<T = HTMLElement> {
   type?: string;
   placeholder?: string;
   name: string;
-  value: string; // Now both can handle null!
+  value: string;
   event: ChangeEventHandler<T>;
 }
