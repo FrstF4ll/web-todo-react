@@ -1,10 +1,4 @@
-import { type ChangeEventHandler, type InputHTMLAttributes } from 'react';
-
-interface TodoInputsProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
-  value: string;
-  event: ChangeEventHandler<HTMLInputElement>;
-}
+import { type TodoInputsProps, type TodoTextArea } from '../Interfaces';
 
 export const TodoInputs = ({
   name,
@@ -13,4 +7,12 @@ export const TodoInputs = ({
   ...props
 }: TodoInputsProps) => {
   return <input name={name} value={value} onChange={event} {...props} />;
+};
+export const TodoTextarea = ({
+  name,
+  value,
+  event,
+  ...props
+}: TodoTextArea) => {
+  return <textarea name={name} value={value} onChange={event} {...props} />;
 };
