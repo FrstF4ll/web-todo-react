@@ -1,0 +1,1 @@
+export const TODO_URL = 'https://api.todos.in.jt-lab.ch:443/todos'
