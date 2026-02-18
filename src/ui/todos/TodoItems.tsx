@@ -1,5 +1,5 @@
 import styles from './TodoList.module.css';
-import type { Todos } from '../shared/Interfaces';
+import type { Todos } from '../../shared/Interfaces';
 import { DangerButton } from '../DangerButton';
 
 export const TodoItems = ({ source }: { source: Todos }) => {

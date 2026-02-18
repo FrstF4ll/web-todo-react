@@ -1,20 +1,20 @@
 import './App.css';
-import { TodosContainer } from './Todos/TodosContainer';
-import { OptionBar } from './UI/OptionBar';
-import { MainMenuWrapper } from './UI/MainMenuWrapper';
-import { AddTodoButton } from './UI/menu/AddTodoButton';
-import { TodoForm } from './UI/TodoForm';
-import { TodoInputs } from './UI/TodoInputs';
-import { TodoTextarea } from './UI/TodoTextarea';
+import { TodosContainer } from './ui/todos/TodosContainer';
+import { OptionBar } from './ui/other/option-bar/OptionBar';
+import { MainMenuWrapper } from './ui/menu/wrapper/MainMenuWrapper';
+import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
+import { TodoForm } from './ui/menu/inputs/TodoForm';
+import { TodoInputs } from './ui/menu/inputs/TodoInputs';
+import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
 import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
-import { postData } from './API/PostData';
-import mainMenuStyles from './UI/MainMenu.module.css';
-import { getData } from './API/GetData';
+import { postData } from './api/PostData';
+import { getData } from './api/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
-import { TodoItems } from './Todos/TodoItems';
-import { StatusMessage } from './StatusMessage';
+import { TodoItems } from './ui/todos/TodoItems';
+import { StatusMessage } from './ui/StatusMessage';
+import mainMenuStyles from './ui/menu/MainMenu.module.css';
 
 const newTodo: ClientTodos = {
   title: '',

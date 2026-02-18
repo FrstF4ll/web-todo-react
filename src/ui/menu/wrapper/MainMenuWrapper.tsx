@@ -1,4 +1,4 @@
-import s from './MainMenu.module.css';
+import s from '../MainMenu.module.css';
 import { type ReactNode } from 'react';
 import { Title } from './Title';
 

@@ -1,4 +1,4 @@
-import { DangerButton } from '../DangerButton';
+import { DangerButton } from '../../DangerButton';
 import styles from './OptionBar.module.css';
 
 export const OptionBar = () => (

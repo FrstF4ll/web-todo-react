@@ -1,4 +1,4 @@
-import s from './MainMenu.module.css';
+import s from '../MainMenu.module.css';
 export const Title = () => {
   return (
     <header className={`flex-column ${s.heading}`}>

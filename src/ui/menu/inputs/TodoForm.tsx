@@ -1,4 +1,4 @@
-import mainMenuStyles from './MainMenu.module.css';
+import mainMenuStyles from '../MainMenu.module.css';
 import type { ReactNode } from 'react';
 
 export const TodoForm = ({ children }: { children: ReactNode }) => {
