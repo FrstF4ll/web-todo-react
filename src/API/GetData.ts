@@ -1,4 +1,4 @@
-import { TODO_URL } from "../shared/variable";
+import { TODO_URL } from '../shared/variable';
 
 const queryHeader = {
   accept: 'application/json',
