@@ -27,7 +27,7 @@ export const TodoInputs = () => {
   };
 
   return (
-    <>
+    <form className={`flex-column ${mainMenuStyles.todoInputs}`}>
       <div className={mainMenuStyles.inputWrapper}>
         <input
           name="title"
@@ -56,6 +56,6 @@ export const TodoInputs = () => {
       >
         Add to list
       </button>
-    </>
+    </form>
   );
 };

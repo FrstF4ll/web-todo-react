@@ -1,14 +1,11 @@
 import { TodosWrapper } from './TodosWrapper';
-import { Suspense } from 'react';
-import { TodoListContent } from './TodoListContent';
+import { Suspense, type ReactNode } from 'react';
 import { Loader } from '../UI/Loader';
 
-export const TodosContainer = () => {
+export const TodosContainer = ({ children }: { children: ReactNode }) => {
   return (
     <TodosWrapper>
-      <Suspense fallback={<Loader />}>
-        <TodoListContent />
-      </Suspense>
+      <Suspense fallback={<Loader />}>{children}</Suspense>
     </TodosWrapper>
   );
 };

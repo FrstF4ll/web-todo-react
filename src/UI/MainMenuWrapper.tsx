@@ -1,7 +1,6 @@
-import { TodoInputsLayout } from './TodoInputsLayout';
 import MainMenuStyles from './MainMenu.module.css';
 import { StatusMessage } from '../Atom';
-import { use } from 'react';
+import { use, type ReactNode } from 'react';
 import { todosPromise } from '../Todos/TodoListContent';
 
 const Title = () => {
@@ -20,12 +19,12 @@ const isEmpty = () => {
   }
 };
 
-export const MainMenuWrapper = () => {
+export const MainMenuWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <section className={`flex-column ${MainMenuStyles.mainMenu}`}>
       <Title />
       {isEmpty()}
-      <TodoInputsLayout />
+      {children}
     </section>
   );
 };
