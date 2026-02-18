@@ -53,8 +53,7 @@ const App = () => {
   };
 
   const isEmpty = () => {
-    const initialTodos = use(todosPromise);
-    const TodoLength = initialTodos.length === 0;
+    const TodoLength = todos.length === 0;
     if (TodoLength) {
       return <StatusMessage statusMessage="No tasks to complete !" />;
     }
