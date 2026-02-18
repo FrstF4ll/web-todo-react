@@ -1,3 +1,5 @@
+import s from './Atom.module.css';
+
 export const DangerButton = ({ text, ...props }: { text: string }) => (
   <button className="danger-button" {...props}>
     {text}
@@ -5,5 +7,5 @@ export const DangerButton = ({ text, ...props }: { text: string }) => (
 );
 
 export const StatusMessage = ({ statusMessage }: { statusMessage: string }) => {
-  return <p>{statusMessage}</p>;
+  return <p className={s.statusMessage}>{statusMessage}</p>;
 };
