@@ -10,6 +10,9 @@ export const TodoItems = ({ source }: { source: Todos }) => {
         {source.title}
       </span>
       <span>
+        {source.content}
+      </span>
+      <span>
         {source.due_date}
         <DangerButton text="X" aria-label={`Delete task ${source.title}`} />
       </span>
