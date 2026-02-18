@@ -3,7 +3,9 @@ import { TodosContainer } from './Todos/TodosContainer';
 import { OptionBar } from './UI/OptionBar';
 import { MainMenuWrapper } from './UI/MainMenuWrapper';
 import { AddTodoButton, TodoForm } from './UI/TodoForm';
-import { TodoInputs, TodoTextarea } from './UI/TodoInputs';
+import { TodoInputs } from './UI/TodoInputs';
+import { TodoTextarea } from './UI/TodoTextarea';
+
 import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
 import { postData } from './API/PostData';

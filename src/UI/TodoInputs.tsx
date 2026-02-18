@@ -1,18 +1,18 @@
-import type { TodoFieldProps } from '../shared/Interfaces';
+import type { ChangeEventHandler } from 'react';
+
+interface TodoInputProps {
+  type?: string;
+  placeholder?: string;
+  name: string;
+  value: string;
+  event: ChangeEventHandler<HTMLInputElement>;
+}
 
 export const TodoInputs = ({
   name,
   value,
   event,
   ...props
-}: TodoFieldProps<HTMLInputElement>) => {
+}: TodoInputProps) => {
   return <input name={name} value={value} onChange={event} {...props} />;
-};
-export const TodoTextarea = ({
-  name,
-  value,
-  event,
-  ...props
-}: TodoFieldProps<HTMLTextAreaElement>) => {
-  return <textarea name={name} value={value} onChange={event} {...props} />;
 };
