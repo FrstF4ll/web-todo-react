@@ -1,11 +1,11 @@
-import { type TodoInputsProps, type TodoTextArea } from '../Interfaces';
+import type { TodoFieldProps } from '../Interfaces';
 
 export const TodoInputs = ({
   name,
   value,
   event,
   ...props
-}: TodoInputsProps) => {
+}: TodoFieldProps<HTMLInputElement>) => {
   return <input name={name} value={value} onChange={event} {...props} />;
 };
 export const TodoTextarea = ({
@@ -13,6 +13,6 @@ export const TodoTextarea = ({
   value,
   event,
   ...props
-}: TodoTextArea) => {
+}: TodoFieldProps<HTMLTextAreaElement>) => {
   return <textarea name={name} value={value} onChange={event} {...props} />;
 };

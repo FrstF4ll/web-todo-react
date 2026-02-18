@@ -1,13 +1,9 @@
-import {
-  type TextareaHTMLAttributes,
-  type ChangeEventHandler,
-  type InputHTMLAttributes,
-} from 'react';
+import { type ChangeEventHandler } from 'react';
 
 export interface ClientTodos {
   title: string;
-  content: string;
-  due_date: string;
+  content: string | null;
+  due_date: string | null;
   done: boolean;
 }
 
@@ -15,14 +11,10 @@ export interface Todos extends ClientTodos {
   id: number;
 }
 
-export interface TodoInputsProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TodoFieldProps<T = HTMLElement> {
+  type?: string;
+  placeholder?: string;
   name: string;
-  value: string;
-  event: ChangeEventHandler<HTMLInputElement>;
-}
-
-export interface TodoTextArea extends TextareaHTMLAttributes<HTMLTextAreaElement> {
-  name: string;
-  value: string;
-  event: ChangeEventHandler<HTMLTextAreaElement>;
+  value: string; // Now both can handle null!
+  event: ChangeEventHandler<T>;
 }

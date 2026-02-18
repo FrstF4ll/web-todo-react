@@ -1,7 +1,5 @@
 import MainMenuStyles from './MainMenu.module.css';
-import { StatusMessage } from '../Atom';
-import { use, type ReactNode } from 'react';
-import { todosPromise } from '../Todos/TodoListContent';
+import { type ReactNode } from 'react';
 
 const Title = () => {
   return (
@@ -11,19 +9,10 @@ const Title = () => {
   );
 };
 
-const isEmpty = () => {
-  const initialTodos = use(todosPromise);
-  const TodoLength = initialTodos.length === 0;
-  if (TodoLength) {
-    return <StatusMessage statusMessage="No tasks to complete !" />;
-  }
-};
-
 export const MainMenuWrapper = ({ children }: { children: ReactNode }) => {
   return (
     <section className={`flex-column ${MainMenuStyles.mainMenu}`}>
       <Title />
-      {isEmpty()}
       {children}
     </section>
   );
