@@ -1,4 +1,4 @@
-import type { Todos, ClientTodos } from '../Interfaces';
+import type { Todos, ClientTodos } from '../shared/Interfaces';
 import { TODO_URL } from '../shared/variable';
 
 export async function postData(todo: ClientTodos): Promise<Todos> {
