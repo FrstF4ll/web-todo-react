@@ -9,7 +9,9 @@ const newTodo: ClientTodos = {
   done: false,
 };
 
-export const TodoInputs = () => {
+
+
+export const TodoForm = () => {
   const [formData, setFormData] = useState(newTodo);
 
   function handleInputChange(

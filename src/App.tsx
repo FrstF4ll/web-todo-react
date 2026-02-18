@@ -3,13 +3,12 @@ import { TodosContainer } from './Todos/TodosContainer';
 import { OptionBar } from './UI/OptionBar';
 import { MainMenuWrapper } from './UI/MainMenuWrapper';
 import { TodoListContent } from './Todos/TodoListContent';
-import { TodoInputs } from './UI/TodoInputs';
-
+import { TodoForm } from './UI/TodoInputs';
 const App = () => {
   return (
     <main>
       <MainMenuWrapper>
-        <TodoInputs />
+        <TodoForm />
       </MainMenuWrapper>
       <OptionBar />
       <TodosContainer>
