@@ -17,7 +17,7 @@ import { StatusMessage } from './Atom';
 const newTodo: ClientTodos = {
   title: '',
   content: '',
-  due_date: '',
+  due_date: null,
   done: false,
 };
 
@@ -33,21 +33,21 @@ const App = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     const { name, value } = e.target;
+    const finalValue = value === '' ? null : value;
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: finalValue,
     });
   }
 
   const handleClick = async () => {
-    if (formData.due_date === '') {
-      formData.due_date = null;
-    }
     if (!formData.title.trim()) {
       return;
     }
 
     const postedTodo = await postData(formData);
+    console.log(postedTodo);
 
     setTodos((prev: Todos[]) => [...prev, postedTodo]);
   };

@@ -9,9 +9,7 @@ export const TodoItems = ({ source }: { source: Todos }) => {
         <input type="checkbox" defaultChecked={source.done} />
         {source.title}
       </span>
-      <span>
-        {source.content}
-      </span>
+      <span>{source.content}</span>
       <span>
         {source.due_date}
         <DangerButton text="X" aria-label={`Delete task ${source.title}`} />
