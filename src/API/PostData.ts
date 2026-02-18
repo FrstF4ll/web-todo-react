@@ -11,7 +11,12 @@ export async function postData(todo: ClientTodos): Promise<Todos> {
     },
     body: JSON.stringify(todo),
   });
-  const responseArray = await response.json();
-  const unwrappedData = responseArray[0] as Todos;
+  const responseFile = await response.json();
+  if (!Array.isArray(responseFile) || responseFile.length === 0) {
+    throw new Error(
+      'Invalid API response: expected an array with at least one item.',
+    );
+  }
+  const unwrappedData = responseFile[0] as Todos;
   return unwrappedData;
 }
