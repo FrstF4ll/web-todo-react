@@ -15,6 +15,8 @@ import type { Todos } from './shared/Interfaces';
 import { TodoItems } from './ui/todos/TodoItems';
 import { StatusMessage } from './ui/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
+import { deleteData } from './api/DeleteData';
+import { DangerButton } from './ui/DangerButton';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -54,6 +56,11 @@ const App = () => {
     setTodos((prev: Todos[]) => [...prev, postedTodo]);
   };
 
+  const handleRemove = async (id: number) => {
+    await deleteData(id);
+    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <main>
       <MainMenuWrapper>
@@ -88,7 +95,13 @@ const App = () => {
       <OptionBar />
       <TodosContainer>
         {todos.map((todo: Todos) => (
-          <TodoItems key={todo.id} source={todo} />
+          <TodoItems key={todo.id} source={todo}>
+            <DangerButton
+              text="X"
+              aria-label={`Delete task ${todo.title}`}
+              onClick={() => handleRemove(todo.id)}
+            />
+          </TodoItems>
         ))}
       </TodosContainer>
     </main>

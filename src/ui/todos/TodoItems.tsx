@@ -1,8 +1,14 @@
 import styles from './TodoList.module.css';
 import type { Todos } from '../../shared/Interfaces';
-import { DangerButton } from '../DangerButton';
+import type { ReactNode } from 'react';
 
-export const TodoItems = ({ source }: { source: Todos }) => {
+export const TodoItems = ({
+  source,
+  children,
+}: {
+  source: Todos;
+  children: ReactNode;
+}) => {
   return (
     <li className={`${styles.todoItem} flex-row`}>
       <span>
@@ -12,7 +18,7 @@ export const TodoItems = ({ source }: { source: Todos }) => {
       <span>{source.content}</span>
       <span>
         {source.due_date}
-        <DangerButton text="X" aria-label={`Delete task ${source.title}`} />
+        {children}
       </span>
     </li>
   );
