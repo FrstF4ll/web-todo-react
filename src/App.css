@@ -42,6 +42,10 @@ button:active {
   flex-direction: column;
 }
 
+.hidden {
+  display: none;
+}
+
 main {
   display: grid;
   grid-template-columns: repeat(5, auto);
