@@ -48,10 +48,15 @@ const [error, setError] = useState(null)
       });
   }, []);
 
-  const handleRemove = async (id: number) => {
-    await deleteData(id);
-    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
-  };
+const handleRemove = (id: number) => {
+  deleteData(id)
+    .then(() => {
+      setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+    })
+    .catch((err) => {
+      setError(err.message);
+    });
+};
 
   return (
     <main>
