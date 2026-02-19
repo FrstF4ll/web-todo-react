@@ -6,11 +6,16 @@ const queryHeader = {
 };
 
 export async function getData(): Promise<Todos[]> {
-  const response = await fetch(TODO_URL, {
-    method: 'GET',
-    headers: queryHeader,
-  });
-  const responseFile = await response.json();
+  try {
 
-  return responseFile as Todos[];
+    const response = await fetch(TODO_URL, {
+      method: 'GET',
+      headers: queryHeader,
+    });
+    const responseFile = await response.json();
+
+    return responseFile as Todos[];
+  } catch (error) {
+    throw new Error(`Can't get datas from server : ${error}`)
+  }
 }
