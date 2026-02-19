@@ -1,5 +1,6 @@
 import { TODO_URL } from '../shared/variable';
 import type { Todos } from '../shared/Interfaces';
+import { apiHandleError } from './apiHandleError';
 const queryHeader = {
   accept: 'application/json',
   'Range-Unit': 'items',
@@ -7,15 +8,14 @@ const queryHeader = {
 
 export async function getData(): Promise<Todos[]> {
   try {
-
     const response = await fetch(TODO_URL, {
       method: 'GET',
       headers: queryHeader,
-    });
+    }).then(apiHandleError);
     const responseFile = await response.json();
 
     return responseFile as Todos[];
   } catch (error) {
-    throw new Error(`Can't get datas from server : ${error}`)
+    throw new Error(`Can't get datas from server : ${error}`);
   }
 }
