@@ -8,15 +8,16 @@ import { TodoInputs } from './ui/menu/inputs/TodoInputs';
 import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
 import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
-import { postData } from './api/PostData';
 import { getData } from './api/GetData';
-import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
 import { TodoItems } from './ui/todos/TodoItems';
 import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
 import { DangerButton } from './ui/other/atoms/DangerButton';
+import { ErrorMessage } from './ui/other/error/ErrorMessage';
+import { useAddTodos } from './shared/customHooks';
+import { useEffect } from 'react';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -28,41 +29,40 @@ const newTodo: ClientTodos = {
 const todosPromise = getData();
 
 const App = () => {
-  const initialTodos = use(todosPromise);
 
-  const [todos, setTodos] = useState(initialTodos);
-  const [formData, setFormData] = useState(newTodo);
+  const [todos, setTodos] = useState<Todos[]>([]);
+  const [formData, setFormData] = useState<ClientTodos>(newTodo);
 
-  function handleInputChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    const { name, value } = e.target;
-    const finalValue = value === '' ? null : value;
+const { handleInputChange, handleAdd, error: addError } = useAddTodos(formData, setTodos, setFormData);
 
-    setFormData({
-      ...formData,
-      [name]: finalValue,
+const [error, setError] = useState(null)
+
+  useEffect(() => {
+    todosPromise
+      .then((data) => {
+        setTodos(data);
+      })
+      .catch((err) => {
+        // On stocke le message pour déclencher l'affichage d'erreur
+        setError(err.message);
+      });
+  }, []);
+
+const handleRemove = (id: number) => {
+  deleteData(id)
+    .then(() => {
+      setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+    })
+    .catch((err) => {
+      setError(err.message);
     });
-  }
-
-  const handleAdd = async () => {
-    if (!formData.title.trim()) {
-      return;
-    }
-
-    const postedTodo = await postData(formData);
-    console.log(postedTodo);
-
-    setTodos((prev: Todos[]) => [...prev, postedTodo]);
-  };
-
-  const handleRemove = async (id: number) => {
-    await deleteData(id);
-    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
-  };
+};
 
   return (
     <main>
+      { error && <ErrorMessage message={error} />}
+      { addError && <ErrorMessage message={addError} />}
+
       <MainMenuWrapper>
         {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
