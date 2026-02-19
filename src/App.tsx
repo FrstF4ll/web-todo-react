@@ -13,10 +13,10 @@ import { getData } from './api/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
 import { TodoItems } from './ui/todos/TodoItems';
-import { StatusMessage } from './ui/StatusMessage';
+import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
-import { DangerButton } from './ui/DangerButton';
+import { DangerButton } from './ui/other/atoms/DangerButton';
 
 const newTodo: ClientTodos = {
   title: '',
