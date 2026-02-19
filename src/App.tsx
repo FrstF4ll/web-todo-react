@@ -9,7 +9,6 @@ import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
 import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
 import { getData } from './api/GetData';
-import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
 import { TodoItems } from './ui/todos/TodoItems';
 import { StatusMessage } from './ui/other/atoms/StatusMessage';
@@ -18,6 +17,7 @@ import { deleteData } from './api/DeleteData';
 import { DangerButton } from './ui/other/atoms/DangerButton';
 import { ErrorMessage } from './ui/other/error/ErrorMessage';
 import { useAddTodos } from './shared/customHooks';
+import { useEffect } from 'react';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -29,16 +29,24 @@ const newTodo: ClientTodos = {
 const todosPromise = getData();
 
 const App = () => {
-  const initialTodos = use(todosPromise);
 
-  const [todos, setTodos] = useState<Todos[]>(initialTodos);
+  const [todos, setTodos] = useState<Todos[]>([]);
   const [formData, setFormData] = useState<ClientTodos>(newTodo);
 
-  const { handleInputChange, handleAdd } = useAddTodos(
-    formData,
-    setTodos,
-    setFormData,
-  );
+const { handleInputChange, handleAdd, error: addError } = useAddTodos(formData, setTodos, setFormData);
+
+const [error, setError] = useState(null)
+
+  useEffect(() => {
+    todosPromise
+      .then((data) => {
+        setTodos(data);
+      })
+      .catch((err) => {
+        // On stocke le message pour déclencher l'affichage d'erreur
+        setError(err.message);
+      });
+  }, []);
 
   const handleRemove = async (id: number) => {
     await deleteData(id);
@@ -47,7 +55,9 @@ const App = () => {
 
   return (
     <main>
-      <ErrorMessage message="Error" />
+      { error && <ErrorMessage message={error} />}
+      { addError && <ErrorMessage message={addError} />}
+
       <MainMenuWrapper>
         {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
