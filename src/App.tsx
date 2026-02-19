@@ -1,6 +1,6 @@
 import './App.css';
 import { TodosContainer } from './ui/todos/TodosContainer';
-import { OptionBar } from './ui/other/option-bar/OptionBar';
+import { OptionBar } from './ui/menu/option-bar/OptionBar';
 import { MainMenuWrapper } from './ui/menu/wrapper/MainMenuWrapper';
 import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
 import { TodoForm } from './ui/menu/inputs/TodoForm';
