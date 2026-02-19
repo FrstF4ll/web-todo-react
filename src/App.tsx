@@ -17,6 +17,7 @@ import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
 import { DangerButton } from './ui/other/atoms/DangerButton';
+import { ErrorMessage } from './ui/other/error/ErrorMessage';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -62,6 +63,7 @@ const App = () => {
 
   return (
     <main>
+      <ErrorMessage message="Error" />
       <MainMenuWrapper>
         {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
