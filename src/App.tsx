@@ -1,6 +1,6 @@
 import './App.css';
 import { TodosContainer } from './ui/todos/TodosContainer';
-import { OptionBar } from './ui/other/option-bar/OptionBar';
+import { OptionBar } from './ui/menu/option-bar/OptionBar';
 import { MainMenuWrapper } from './ui/menu/wrapper/MainMenuWrapper';
 import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
 import { TodoForm } from './ui/menu/inputs/TodoForm';
@@ -13,8 +13,10 @@ import { getData } from './api/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
 import { TodoItems } from './ui/todos/TodoItems';
-import { StatusMessage } from './ui/StatusMessage';
+import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
+import { deleteData } from './api/DeleteData';
+import { DangerButton } from './ui/other/atoms/DangerButton';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -43,7 +45,7 @@ const App = () => {
     });
   }
 
-  const handleClick = async () => {
+  const handleAdd = async () => {
     if (!formData.title.trim()) {
       return;
     }
@@ -52,6 +54,11 @@ const App = () => {
     console.log(postedTodo);
 
     setTodos((prev: Todos[]) => [...prev, postedTodo]);
+  };
+
+  const handleRemove = async (id: number) => {
+    await deleteData(id);
+    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -82,13 +89,19 @@ const App = () => {
             value={formData.content ?? ''}
             event={handleInputChange}
           />
-          <AddTodoButton event={handleClick} />
+          <AddTodoButton event={handleAdd} />
         </TodoForm>
       </MainMenuWrapper>
       <OptionBar />
       <TodosContainer>
         {todos.map((todo: Todos) => (
-          <TodoItems key={todo.id} source={todo} />
+          <TodoItems key={todo.id} source={todo}>
+            <DangerButton
+              text="X"
+              aria-label={`Delete task ${todo.title}`}
+              onClick={() => handleRemove(todo.id)}
+            />
+          </TodoItems>
         ))}
       </TodosContainer>
     </main>
