@@ -51,7 +51,6 @@ const App = () => {
     }
 
     const postedTodo = await postData(formData);
-    console.log(postedTodo);
 
     setTodos((prev: Todos[]) => [...prev, postedTodo]);
   };
