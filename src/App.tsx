@@ -8,7 +8,6 @@ import { TodoInputs } from './ui/menu/inputs/TodoInputs';
 import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
 import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
-import { postData } from './api/PostData';
 import { getData } from './api/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
@@ -18,6 +17,7 @@ import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
 import { DangerButton } from './ui/other/atoms/DangerButton';
 import { ErrorMessage } from './ui/other/error/ErrorMessage';
+import { useAddTodos } from './shared/customHooks';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -31,30 +31,14 @@ const todosPromise = getData();
 const App = () => {
   const initialTodos = use(todosPromise);
 
-  const [todos, setTodos] = useState(initialTodos);
-  const [formData, setFormData] = useState(newTodo);
+  const [todos, setTodos] = useState<Todos[]>(initialTodos);
+  const [formData, setFormData] = useState<ClientTodos>(newTodo);
 
-  function handleInputChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    const { name, value } = e.target;
-    const finalValue = value === '' ? null : value;
-
-    setFormData({
-      ...formData,
-      [name]: finalValue,
-    });
-  }
-
-  const handleAdd = async () => {
-    if (!formData.title.trim()) {
-      return;
-    }
-
-    const postedTodo = await postData(formData);
-
-    setTodos((prev: Todos[]) => [...prev, postedTodo]);
-  };
+  const { handleInputChange, handleAdd } = useAddTodos(
+    formData,
+    setTodos,
+    setFormData,
+  );
 
   const handleRemove = async (id: number) => {
     await deleteData(id);
