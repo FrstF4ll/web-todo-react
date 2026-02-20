@@ -39,7 +39,7 @@ export const EditableContent = ({
   ) : (
     <Tag onClick={() => setIsEditing(true)} style={{ cursor: 'pointer' }}>
       {/* ICI : Utilise 'value' (le parent) plutôt que 'draft' (le local) */}
-      {value || 'no due date'}
+      {value}
     </Tag>
   );
 };

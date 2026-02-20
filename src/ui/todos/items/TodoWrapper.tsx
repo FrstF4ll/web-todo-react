@@ -17,6 +17,13 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
   const [todoData, setTodoData] = useState<Todos>(source);
 
   const handleUpdate = async (changes: Partial<Todos>) => {
+    if (
+      changes.hasOwnProperty('title') &&
+      (!changes.title || changes.title.trim() === '')
+    ) {
+      return;
+    }
+
     const updatedTodo = { ...todoData, ...changes };
     const { id, ...dataForApi } = updatedTodo;
     setTodoData(updatedTodo);
