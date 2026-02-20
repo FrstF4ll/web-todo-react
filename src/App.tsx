@@ -1,5 +1,5 @@
 import './App.css';
-import { TodosContainer } from './ui/todos/TodosContainer';
+import { TodosContainer } from './ui/todos/container/TodosContainer';
 import { OptionBar } from './ui/menu/option-bar/OptionBar';
 import { MainMenuWrapper } from './ui/menu/wrapper/MainMenuWrapper';
 import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
@@ -12,7 +12,7 @@ import { postData } from './api/PostData';
 import { getData } from './api/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
-import { TodoItems } from './ui/todos/TodoItems';
+import { TodoItems } from './ui/todos/items/TodoItems';
 import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';

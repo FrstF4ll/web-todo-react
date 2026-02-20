@@ -1,5 +1,5 @@
-import styles from './TodoList.module.css';
-import type { Todos } from '../../shared/Interfaces';
+import styles from '../TodoList.module.css';
+import type { Todos } from '../../../shared/Interfaces';
 import type { ReactNode } from 'react';
 
 export const TodoItems = ({
