@@ -1,5 +1,5 @@
 import './App.css';
-import { TodosContainer } from './ui/todos/TodosContainer';
+import { TodosContainer } from './ui/todos/container/TodosContainer';
 import { OptionBar } from './ui/menu/option-bar/OptionBar';
 import { MainMenuWrapper } from './ui/menu/wrapper/MainMenuWrapper';
 import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
@@ -12,11 +12,10 @@ import { postData } from './api/PostData';
 import { getData } from './api/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
-import { TodoItems } from './ui/todos/TodoItems';
+import { TodoWrapper } from './ui/todos/items/TodoWrapper';
 import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
-import { DangerButton } from './ui/other/atoms/DangerButton';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -51,7 +50,6 @@ const App = () => {
     }
 
     const postedTodo = await postData(formData);
-    console.log(postedTodo);
 
     setTodos((prev: Todos[]) => [...prev, postedTodo]);
   };
@@ -95,13 +93,11 @@ const App = () => {
       <OptionBar />
       <TodosContainer>
         {todos.map((todo: Todos) => (
-          <TodoItems key={todo.id} source={todo}>
-            <DangerButton
-              text="X"
-              aria-label={`Delete task ${todo.title}`}
-              onClick={() => handleRemove(todo.id)}
-            />
-          </TodoItems>
+          <TodoWrapper
+            key={todo.id}
+            source={todo}
+            onDelete={() => handleRemove(todo.id)}
+          />
         ))}
       </TodosContainer>
     </main>
