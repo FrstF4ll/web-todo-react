@@ -29,10 +29,7 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
     setTodoData(updatedTodo);
     await patchData(dataForApi, todoData.id);
   };
-
-  if (!source.due_date) {
-    source.due_date = 'No due';
-  }
+  
   console.log(todoData.due_date);
   return (
     <li className={`${styles.todoItem} flex-row`}>
