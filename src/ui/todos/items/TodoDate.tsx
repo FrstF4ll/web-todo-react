@@ -6,12 +6,5 @@ interface TodoDateProps {
 }
 
 export const TodoDate = ({ dueDate, onSave }: TodoDateProps) => {
-  return (
-    <EditableContent
-      value={dueDate}
-      type="date"
-      tagName="span"
-      onSave={onSave}
-    />
-  );
+  return <EditableContent value={dueDate} type="date" onSave={onSave} />;
 };

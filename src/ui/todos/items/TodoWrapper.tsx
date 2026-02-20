@@ -39,15 +39,17 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
         content={todoData.content || 'No description'}
         onSave={(newVal) => handleUpdate({ content: newVal })}
       />
-      <TodoDate
-        dueDate={todoData.due_date || 'No due date'}
-        onSave={(newVal) => handleUpdate({ due_date: newVal })}
-      />
-      <DangerButton
-        text="X"
-        aria-label={`Delete task ${source.title}`}
-        onClick={onDelete}
-      />
+      <span>
+        <TodoDate
+          dueDate={todoData.due_date || 'No due date'}
+          onSave={(newVal) => handleUpdate({ due_date: newVal })}
+        />
+        <DangerButton
+          text="X"
+          aria-label={`Delete task ${source.title}`}
+          onClick={onDelete}
+        />
+      </span>
     </li>
   );
 };
