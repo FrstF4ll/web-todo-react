@@ -1,6 +1,8 @@
 import styles from '../TodoList.module.css';
 import type { Todos } from '../../../shared/Interfaces';
 import type { ReactNode } from 'react';
+import { TodoTitle } from './TodoTitle';
+import { TodoCheckbox } from './TodoCheckbox';
 
 export const TodoItems = ({
   source,
@@ -11,10 +13,9 @@ export const TodoItems = ({
 }) => {
   return (
     <li className={`${styles.todoItem} flex-row`}>
-      <span>
-        <input type="checkbox" defaultChecked={source.done} />
-        {source.title}
-      </span>
+      <TodoTitle title={source.title}>
+        <TodoCheckbox isDone={source.done}></TodoCheckbox>
+      </TodoTitle>
       <span>{source.content}</span>
       <span>
         {source.due_date}
