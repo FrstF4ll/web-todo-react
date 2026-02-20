@@ -24,12 +24,19 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
       return;
     }
 
+      if (
+      changes.hasOwnProperty('content') &&
+      (!changes.content || changes.content.trim() === '')
+    ) {
+      return 'No description';
+    }
+
     const updatedTodo = { ...todoData, ...changes };
     const { id, ...dataForApi } = updatedTodo;
     setTodoData(updatedTodo);
     await patchData(dataForApi, todoData.id);
   };
-  
+
   console.log(todoData.due_date);
   return (
     <li className={`${styles.todoItem} flex-row`}>
