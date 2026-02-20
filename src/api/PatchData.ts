@@ -1,7 +1,10 @@
 import type { ClientTodos, Todos } from '../shared/Interfaces';
 import { TODO_URL } from '../shared/variable';
 
-export async function patchData(todo: ClientTodos, id: number): Promise<Todos> {
+export async function patchData(
+  todo: ClientTodos,
+  id: number,
+): Promise<ClientTodos> {
   const completeURL = `${TODO_URL}?id=eq.${id}`;
 
   const response = await fetch(completeURL, {

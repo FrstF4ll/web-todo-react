@@ -5,6 +5,8 @@ import { TodoCheckbox } from './TodoCheckbox';
 import { TodoDescription } from './TodoDescription';
 import { TodoDate } from './TodoDate';
 import { DangerButton } from '../../other/atoms/DangerButton';
+import { useState } from 'react';
+import { patchData } from '../../../api/PatchData';
 
 interface TodoWrapperProps {
   source: Todos;
@@ -12,10 +14,22 @@ interface TodoWrapperProps {
 }
 
 export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
+  const [todoData, setTodoData] = useState<Todos>(source);
+
+  const handleUpdate = async (changes: Partial<Todos>) => {
+    const updatedTodo = { ...todoData, ...changes };
+    const { id, ...dataForApi } = updatedTodo;
+    setTodoData(updatedTodo);
+    await patchData(dataForApi, todoData.id);
+  };
+
   return (
     <li className={`${styles.todoItem} flex-row`}>
-      <TodoTitle title={source.title}>
-        <TodoCheckbox isDone={source.done}></TodoCheckbox>
+      <TodoTitle
+        title={todoData.title}
+        onSave={(newVal) => handleUpdate({ title: newVal })}
+      >
+        <TodoCheckbox isDone={todoData.done} />
       </TodoTitle>
       <TodoDescription content={source.content} />
       <TodoDate dueDate={source.due_date} />
