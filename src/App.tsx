@@ -12,11 +12,10 @@ import { postData } from './api/PostData';
 import { getData } from './api/GetData';
 import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
-import { TodoItems } from './ui/todos/items/TodoItems';
+import { TodoWrapper } from './ui/todos/items/TodoWrapper';
 import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
-import { DangerButton } from './ui/other/atoms/DangerButton';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -95,13 +94,7 @@ const App = () => {
       <OptionBar />
       <TodosContainer>
         {todos.map((todo: Todos) => (
-          <TodoItems key={todo.id} source={todo}>
-            <DangerButton
-              text="X"
-              aria-label={`Delete task ${todo.title}`}
-              onClick={() => handleRemove(todo.id)}
-            />
-          </TodoItems>
+          <TodoWrapper key={todo.id} source={todo} onDelete={() => handleRemove(todo.id)}/>
         ))}
       </TodosContainer>
     </main>
