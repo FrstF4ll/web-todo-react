@@ -35,7 +35,10 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
       >
         <TodoCheckbox isDone={todoData.done} />
       </TodoTitle>
-      <TodoDescription content={source.content} />
+      <TodoDescription
+        content={todoData.content || 'No description'}
+        onSave={(newVal) => handleUpdate({ content: newVal })}
+      />
       <TodoDate
         dueDate={todoData.due_date || 'No due date'}
         onSave={(newVal) => handleUpdate({ due_date: newVal })}
