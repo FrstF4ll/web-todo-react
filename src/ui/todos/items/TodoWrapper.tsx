@@ -23,6 +23,10 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
     await patchData(dataForApi, todoData.id);
   };
 
+  if (!source.due_date) {
+    source.due_date = 'No due';
+  }
+  console.log(todoData.due_date);
   return (
     <li className={`${styles.todoItem} flex-row`}>
       <TodoTitle
@@ -32,7 +36,10 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
         <TodoCheckbox isDone={todoData.done} />
       </TodoTitle>
       <TodoDescription content={source.content} />
-      <TodoDate dueDate={source.due_date} />
+      <TodoDate
+        dueDate={todoData.due_date || 'No due date'}
+        onSave={(newVal) => handleUpdate({ due_date: newVal })}
+      />
       <DangerButton
         text="X"
         aria-label={`Delete task ${source.title}`}

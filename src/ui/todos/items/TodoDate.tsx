@@ -1,5 +1,17 @@
+import { EditableContent } from './EditableContent';
+
 interface TodoDateProps {
-  dueDate: string | null;
+  dueDate: string;
+  onSave: (newDate: string) => void;
 }
 
-export const TodoDate = ({ dueDate }: TodoDateProps) => <span>{dueDate}</span>;
+export const TodoDate = ({ dueDate, onSave }: TodoDateProps) => {
+  return (
+    <EditableContent
+      value={dueDate}
+      type="date"
+      tagName="span"
+      onSave={onSave}
+    />
+  );
+};
