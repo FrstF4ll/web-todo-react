@@ -94,7 +94,11 @@ const App = () => {
       <OptionBar />
       <TodosContainer>
         {todos.map((todo: Todos) => (
-          <TodoWrapper key={todo.id} source={todo} onDelete={() => handleRemove(todo.id)}/>
+          <TodoWrapper
+            key={todo.id}
+            source={todo}
+            onDelete={() => handleRemove(todo.id)}
+          />
         ))}
       </TodosContainer>
     </main>
