@@ -18,14 +18,14 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
 
   const handleUpdate = async (changes: Partial<Todos>) => {
     if (
-      changes.hasOwnProperty('title') &&
+      changes.title !== undefined &&
       (!changes.title || changes.title.trim() === '')
     ) {
       return;
     }
 
     if (
-      changes.hasOwnProperty('content') &&
+      changes.content !== undefined &&
       (!changes.content || changes.content.trim() === '')
     ) {
       changes.content = 'No description';
