@@ -8,7 +8,6 @@ interface TodoDescriptionProps {
 export const TodoDescription = ({ content, onSave }: TodoDescriptionProps) => {
   return (
     <EditableContent
-      // On convertit le null en chaîne vide pour l'input
       value={content ?? ''}
       type="text"
       tagName="p"
