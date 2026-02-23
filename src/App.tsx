@@ -36,6 +36,7 @@ const App = () => {
     handleInputChange,
     handleAdd,
     error: addError,
+    setError: setAddError,
   } = useAddTodos(formData, setTodos, setFormData);
 
   const [error, setError] = useState<string | null>(null);
@@ -103,8 +104,15 @@ const App = () => {
 
   return (
     <main>
-      {error && <ErrorMessage message={error} />}
-      {addError && <ErrorMessage message={addError} />}
+      {error && <ErrorMessage message={error} onClose={() => setError(null)} />}
+      {addError && (
+        <ErrorMessage
+          message={addError}
+          onClose={() => {
+            setAddError(null);
+          }}
+        />
+      )}
 
       <MainMenuWrapper>
         {todos.length === 0 && (

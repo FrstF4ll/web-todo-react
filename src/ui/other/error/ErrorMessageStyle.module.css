@@ -25,3 +25,18 @@
   width: 1.75rem;
   aspect-ratio: 1 / 1;
 }
+
+.closeButton {
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+  transition: opacity 0.2s;
+  color: #f85149;
+  border: 1px solid #f85149;
+  opacity: 0.4;
+  cursor: pointer;
+  display: flex;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}

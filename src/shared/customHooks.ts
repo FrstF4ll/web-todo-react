@@ -53,5 +53,6 @@ export function useAddTodos(
     handleInputChange,
     handleAdd,
     error,
+    setError,
   };
 }
