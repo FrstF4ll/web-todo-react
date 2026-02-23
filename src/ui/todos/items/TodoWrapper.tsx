@@ -4,7 +4,7 @@ import { TodoTitle } from './TodoTitle';
 import { TodoCheckbox } from './TodoCheckbox';
 import { TodoDescription } from './TodoDescription';
 import { TodoDate } from './TodoDate';
-import { DangerButton } from '../../other/atoms/DangerButton';
+import { DangerButton } from '../../menu/inputs/DangerButton';
 
 interface TodoWrapperProps {
   source: Todos;
