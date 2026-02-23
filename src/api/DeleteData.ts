@@ -9,6 +9,6 @@ export async function deleteData(id: number): Promise<void> {
     }).then(apiHandleError);
   } catch (error) {
     console.error(error);
-    throw new Error(`Failed to delete todo. Check console for details`);
+    throw new Error(`Failed to delete todo: ${(error as Error).message}`);
   }
 }

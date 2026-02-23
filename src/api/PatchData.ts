@@ -27,6 +27,6 @@ export async function patchData(
     return unwrappedData;
   } catch (error) {
     console.error(error);
-    throw new Error('Failed to modify todo. Check console for details.');
+    throw new Error(`'Failed to modify todo: ${(error as Error).message}'`);
   }
 }
