@@ -1,4 +1,4 @@
-import type { ClientTodos, Todos } from '../shared/Interfaces';
+import type { ClientTodos } from '../shared/Interfaces';
 import { TODO_URL } from '../shared/variable';
 
 export async function patchData(
