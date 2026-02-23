@@ -8,14 +8,16 @@ import { TodoInputs } from './ui/menu/inputs/TodoInputs';
 import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
 import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
-import { postData } from './api/PostData';
 import { getData } from './api/GetData';
-import { use } from 'react';
 import type { Todos } from './shared/Interfaces';
 import { TodoWrapper } from './ui/todos/items/TodoWrapper';
 import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
+import { ErrorMessage } from './ui/other/error/ErrorMessage';
+import { useAddTodos } from './shared/customHooks';
+import { useEffect } from 'react';
+import { patchData } from './api/PatchData';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -27,40 +29,91 @@ const newTodo: ClientTodos = {
 const todosPromise = getData();
 
 const App = () => {
-  const initialTodos = use(todosPromise);
+  const [todos, setTodos] = useState<Todos[]>([]);
+  const [formData, setFormData] = useState<ClientTodos>(newTodo);
 
-  const [todos, setTodos] = useState(initialTodos);
-  const [formData, setFormData] = useState(newTodo);
+  const {
+    handleInputChange,
+    handleAdd,
+    error: addError,
+    setError: setAddError,
+  } = useAddTodos(formData, setTodos, setFormData);
 
-  function handleInputChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) {
-    const { name, value } = e.target;
-    const finalValue = value === '' ? null : value;
+  const [error, setError] = useState<string | null>(null);
 
-    setFormData({
-      ...formData,
-      [name]: finalValue,
-    });
-  }
+  useEffect(() => {
+    todosPromise
+      .then((data) => {
+        setTodos(data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
+  }, []);
 
-  const handleAdd = async () => {
-    if (!formData.title.trim()) {
+  const handleUpdate = async (id: number, changes: Partial<Todos>) => {
+    setError(null);
+
+    if (
+      changes.title !== undefined &&
+      (!changes.title || changes.title.trim() === '')
+    )
       return;
+
+    if (
+      changes.content !== undefined &&
+      (!changes.content || changes.content.trim() === '')
+    ) {
+      changes.content = 'No description';
     }
 
-    const postedTodo = await postData(formData);
+    if (
+      changes.due_date !== undefined &&
+      (!changes.due_date || changes.due_date === '')
+    ) {
+      changes.due_date = null;
+    }
 
-    setTodos((prev: Todos[]) => [...prev, postedTodo]);
+    try {
+      const currentTodo = todos.find((t) => t.id === id);
+      if (!currentTodo) return;
+
+      const updatedTodo = { ...currentTodo, ...changes };
+      const { id: _, ...dataForApi } = updatedTodo;
+
+      await patchData(dataForApi, id);
+
+      setTodos((prevTodos) =>
+        prevTodos.map((t) => (t.id === id ? updatedTodo : t)),
+      );
+    } catch (err: any) {
+      setError(err.message);
+      console.error('Update failed:', err);
+    }
   };
 
   const handleRemove = async (id: number) => {
-    await deleteData(id);
-    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+    try {
+      await deleteData(id);
+      setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+    } catch (error: any) {
+      setError(error.message);
+      console.error('Cannot delete task : ', error);
+    }
   };
 
   return (
     <main>
+      {error && <ErrorMessage message={error} onClose={() => setError(null)} />}
+      {addError && (
+        <ErrorMessage
+          message={addError}
+          onClose={() => {
+            setAddError(null);
+          }}
+        />
+      )}
+
       <MainMenuWrapper>
         {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
@@ -96,6 +149,7 @@ const App = () => {
           <TodoWrapper
             key={todo.id}
             source={todo}
+            onUpdate={(changes) => handleUpdate(todo.id, changes)}
             onDelete={() => handleRemove(todo.id)}
           />
         ))}
