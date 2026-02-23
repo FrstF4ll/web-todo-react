@@ -22,6 +22,6 @@ export async function patchData(
       'Invalid API response: expected an array with at least one item.',
     );
   }
-  const unwrappedData = responseFile[0] as Todos;
+  const unwrappedData = responseFile[0] as ClientTodos;
   return unwrappedData;
 }
