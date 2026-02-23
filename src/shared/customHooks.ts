@@ -45,7 +45,7 @@ export function useAddTodos(
         done: false,
       });
     } catch (err: any) {
-      setError("Server error: Could not save the todo.");
+      setError('Server error: Could not save the todo.');
     }
   };
 

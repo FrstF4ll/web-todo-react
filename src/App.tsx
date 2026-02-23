@@ -1,5 +1,5 @@
 import './App.css';
-import { TodosContainer } from './ui/todos/TodosContainer';
+import { TodosContainer } from './ui/todos/container/TodosContainer';
 import { OptionBar } from './ui/menu/option-bar/OptionBar';
 import { MainMenuWrapper } from './ui/menu/wrapper/MainMenuWrapper';
 import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
@@ -10,14 +10,14 @@ import { useState } from 'react';
 import type { ClientTodos } from './shared/Interfaces';
 import { getData } from './api/GetData';
 import type { Todos } from './shared/Interfaces';
-import { TodoItems } from './ui/todos/TodoItems';
+import { TodoWrapper } from './ui/todos/items/TodoWrapper';
 import { StatusMessage } from './ui/other/atoms/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { deleteData } from './api/DeleteData';
-import { DangerButton } from './ui/other/atoms/DangerButton';
 import { ErrorMessage } from './ui/other/error/ErrorMessage';
 import { useAddTodos } from './shared/customHooks';
 import { useEffect } from 'react';
+import { postData } from './api/PostData';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -29,13 +29,16 @@ const newTodo: ClientTodos = {
 const todosPromise = getData();
 
 const App = () => {
-
   const [todos, setTodos] = useState<Todos[]>([]);
   const [formData, setFormData] = useState<ClientTodos>(newTodo);
 
-const { handleInputChange, handleAdd, error: addError } = useAddTodos(formData, setTodos, setFormData);
+  const { handleInputChange, error: addError } = useAddTodos(
+    formData,
+    setTodos,
+    setFormData,
+  );
 
-const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     todosPromise
@@ -48,20 +51,25 @@ const [error, setError] = useState(null)
       });
   }, []);
 
-const handleRemove = (id: number) => {
-  deleteData(id)
-    .then(() => {
-      setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
-    })
-    .catch((err) => {
-      setError(err.message);
-    });
-};
+  const handleAdd = async () => {
+    if (!formData.title.trim()) {
+      return;
+    }
+
+    const postedTodo = await postData(formData);
+
+    setTodos((prev: Todos[]) => [...prev, postedTodo]);
+  };
+
+  const handleRemove = async (id: number) => {
+    await deleteData(id);
+    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+  };
 
   return (
     <main>
-      { error && <ErrorMessage message={error} />}
-      { addError && <ErrorMessage message={addError} />}
+      {error && <ErrorMessage message={error} />}
+      {addError && <ErrorMessage message={addError} />}
 
       <MainMenuWrapper>
         {todos.length === 0 && (
@@ -95,13 +103,11 @@ const handleRemove = (id: number) => {
       <OptionBar />
       <TodosContainer>
         {todos.map((todo: Todos) => (
-          <TodoItems key={todo.id} source={todo}>
-            <DangerButton
-              text="X"
-              aria-label={`Delete task ${todo.title}`}
-              onClick={() => handleRemove(todo.id)}
-            />
-          </TodoItems>
+          <TodoWrapper
+            key={todo.id}
+            source={todo}
+            onDelete={() => handleRemove(todo.id)}
+          />
         ))}
       </TodosContainer>
     </main>
