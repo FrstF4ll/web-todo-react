@@ -17,7 +17,6 @@ import { deleteData } from './api/DeleteData';
 import { ErrorMessage } from './ui/other/error/ErrorMessage';
 import { useAddTodos } from './shared/customHooks';
 import { useEffect } from 'react';
-import { postData } from './api/PostData';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -32,13 +31,13 @@ const App = () => {
   const [todos, setTodos] = useState<Todos[]>([]);
   const [formData, setFormData] = useState<ClientTodos>(newTodo);
 
-  const { handleInputChange, error: addError } = useAddTodos(
-    formData,
-    setTodos,
-    setFormData,
-  );
+  const {
+    handleInputChange,
+    handleAdd,
+    error: addError,
+  } = useAddTodos(formData, setTodos, setFormData);
 
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     todosPromise
@@ -46,20 +45,9 @@ const App = () => {
         setTodos(data);
       })
       .catch((err) => {
-        // On stocke le message pour déclencher l'affichage d'erreur
         setError(err.message);
       });
   }, []);
-
-  const handleAdd = async () => {
-    if (!formData.title.trim()) {
-      return;
-    }
-
-    const postedTodo = await postData(formData);
-
-    setTodos((prev: Todos[]) => [...prev, postedTodo]);
-  };
 
   const handleRemove = async (id: number) => {
     await deleteData(id);
