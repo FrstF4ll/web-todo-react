@@ -6,5 +6,8 @@ interface TodoDateProps {
 }
 
 export const TodoDate = ({ dueDate, onSave }: TodoDateProps) => {
+  if (dueDate === null) {
+    dueDate = 'No due date';
+  }
   return <EditableContent value={dueDate} type="date" onSave={onSave} />;
 };
