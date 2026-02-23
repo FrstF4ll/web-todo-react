@@ -50,8 +50,13 @@ const App = () => {
   }, []);
 
   const handleRemove = async (id: number) => {
-    await deleteData(id);
-    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+    try {
+      await deleteData(id);
+      setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
+    } catch (error: any) {
+      setError(error.message);
+      console.error('Cannot delete task : ', error);
+    }
   };
 
   return (

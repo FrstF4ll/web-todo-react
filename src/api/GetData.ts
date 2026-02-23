@@ -16,6 +16,7 @@ export async function getData(): Promise<Todos[]> {
 
     return responseFile as Todos[];
   } catch (error) {
-    throw new Error(`Can't get datas from server : ${error}`);
+    console.error(error);
+    throw new Error(`Can't get todos from server. Check console for details`);
   }
 }
