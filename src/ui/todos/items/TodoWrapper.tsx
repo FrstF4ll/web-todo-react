@@ -32,7 +32,7 @@ export const TodoWrapper = ({ source, onDelete }: TodoWrapperProps) => {
     }
 
     if (
-      changes.hasOwnProperty('due_date') &&
+      changes.due_date !== undefined &&
       (!changes.due_date || changes.due_date === '')
     ) {
       changes.due_date = null;
