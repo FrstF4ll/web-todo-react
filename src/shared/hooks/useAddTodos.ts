@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react';
-import { postData } from '../api/PostData';
-import type { ClientTodos, Todos } from '../shared/Interfaces';
+import { postData } from '../../api/PostData';
+import type { ClientTodos, Todos } from '../../shared/Interfaces';
 import { useState } from 'react';
 
 type StateSetter<T> = Dispatch<SetStateAction<T>>;
