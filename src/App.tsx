@@ -13,7 +13,6 @@ import type { Todos } from './shared/Interfaces';
 import { TodoWrapper } from './ui/todos/items/TodoWrapper';
 import { StatusMessage } from './ui/other/message/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
-import { deleteData } from './api/DeleteData';
 import { ErrorMessage } from './ui/other/message/ErrorMessage';
 import { useAddTodos } from './shared/hooks/useAddTodos';
 import { useEffect } from 'react';
