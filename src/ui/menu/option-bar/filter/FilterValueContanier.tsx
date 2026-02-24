@@ -2,9 +2,9 @@ import styles from './TodoFilter.module.css';
 export const FilterValueContainer = () => {
   return (
     <div className={`${styles.valueContainer}`}>
-      <select className={styles.hiddenSelect}>
-        <option value="random">Randomized</option>
-      </select>
+        <div className={styles.option}>Randomized</div>
+        <div className={styles.option}>Name</div>
+        <div className={styles.option}>Date</div>
     </div>
   );
 };
