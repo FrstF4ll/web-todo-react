@@ -18,6 +18,7 @@ import { ErrorMessage } from './ui/other/message/ErrorMessage';
 import { useAddTodos } from './shared/hooks/useAddTodos';
 import { useEffect } from 'react';
 import { useUpdateTodos } from './shared/hooks/useUpdateTodos';
+import { useRemoveTodos } from './shared/hooks/useRemoveTodos';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -45,6 +46,12 @@ const App = () => {
     handleUpdate,
   } = useUpdateTodos(todos, setTodos);
 
+  const {
+    error: removeError,
+    setError: setRemoveError,
+    handleRemove,
+  } = useRemoveTodos(setTodos);
+
   useEffect(() => {
     todosPromise
       .then((data) => {
@@ -54,16 +61,6 @@ const App = () => {
         setError(err.message);
       });
   }, []);
-
-  const handleRemove = async (id: number) => {
-    try {
-      await deleteData(id);
-      setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
-    } catch (error: any) {
-      setError(error.message);
-      console.error('Cannot delete task : ', error);
-    }
-  };
 
   return (
     <main>
@@ -82,7 +79,12 @@ const App = () => {
           onClose={() => setUpdateError(null)}
         />
       )}
-
+      {removeError && (
+        <ErrorMessage
+          message={`Deletion failed: ${updateError}`}
+          onClose={() => setRemoveError(null)}
+        />
+      )}
       <MainMenuWrapper>
         {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
