@@ -9,7 +9,7 @@
   padding: 4px 8px;
   gap: 6px;
   color: #000000;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   transition: background-color 0.2s ease;
   min-width: max-content;
   z-index: 2;
