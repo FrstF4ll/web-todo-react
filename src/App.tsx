@@ -80,7 +80,7 @@ const App = () => {
       )}
       {removeError && (
         <ErrorMessage
-          message={`Deletion failed: ${updateError}`}
+          message={`Deletion failed: ${removeError}`}
           onClose={() => setRemoveError(null)}
         />
       )}
@@ -88,7 +88,7 @@ const App = () => {
         {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
         )}
-        <TodoForm>
+        <TodoForm onSave={handleAdd}>
           <div className={mainMenuStyles.inputWrapper}>
             <TodoInputs
               type="text"
