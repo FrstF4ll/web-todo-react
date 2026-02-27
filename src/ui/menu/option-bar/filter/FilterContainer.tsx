@@ -1,23 +1,32 @@
 import { useState } from 'react';
 import { FilterLayout } from './FilterLayout';
-import { FilterValueContainer } from './FilterValueContanier';
+import { FilterValueContainer } from './FilterValueContainer';
 import styles from './TodoFilter.module.css';
 import { useOptionsDisplay } from '../../../../shared/hooks/useOptionsDisplay';
+import { FilterOption } from './FilterOption';
+const SORT_OPTIONS = ['Any', 'Name', 'Date', 'Undone', 'Done'] as const;
+export type SortOption = (typeof SORT_OPTIONS)[number];
 
 export const FilterContainer = () => {
-  const SORT_OPTIONS = ['Any', 'Name', 'Date', 'Undone', 'Done'] as const;
-  type SortOption = (typeof SORT_OPTIONS)[number];
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<SortOption[]>([SORT_OPTIONS[0]]);
+
   const { toggleOption, getOptionClassName } = useOptionsDisplay(
     selected,
     setSelected,
   );
 
+  const handleSelect = (option: SortOption) => {
+    toggleOption(option);
+    setIsOpen(false);
+  };
+
+  const handleToggleMenu = () => setIsOpen(!isOpen);
+
   return (
     <div
       className={`${styles.sortWrapper} flex-row`}
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={handleToggleMenu}
     >
       <FilterLayout>
         <span className={styles.label}>Sort:</span>
@@ -27,17 +36,11 @@ export const FilterContainer = () => {
         {isOpen && (
           <FilterValueContainer>
             {SORT_OPTIONS.map((option) => (
-              <div
-                key={option}
-                className={getOptionClassName(option)}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleOption(option);
-                  setIsOpen(false);
-                }}
-              >
-                {option}
-              </div>
+              <FilterOption
+                sortOption={option}
+                optionClassName={getOptionClassName}
+                selectOption={handleSelect}
+              ></FilterOption>
             ))}
           </FilterValueContainer>
         )}
