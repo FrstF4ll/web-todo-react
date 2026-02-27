@@ -8,7 +8,10 @@ interface TodoFormProps {
 
 export const TodoForm = ({ children, onSave }: TodoFormProps) => {
   return (
-    <form className={`flex-column ${mainMenuStyles.todoInputs}`} onSubmit={onSave}>
+    <form
+      className={`flex-column ${mainMenuStyles.todoInputs}`}
+      onSubmit={onSave}
+    >
       {children}
     </form>
   );

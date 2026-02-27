@@ -9,7 +9,10 @@ export const FilterContainer = () => {
   type SortOption = (typeof SORT_OPTIONS)[number];
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<SortOption[]>([SORT_OPTIONS[0]]);
-  const {toggleOption, getOptionClassName} = useOptionsDisplay(selected, setSelected)
+  const { toggleOption, getOptionClassName } = useOptionsDisplay(
+    selected,
+    setSelected,
+  );
 
   return (
     <div

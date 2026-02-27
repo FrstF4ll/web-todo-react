@@ -1,7 +1,6 @@
 import styles from '../TodoList.module.css';
 import type { Todos } from '../../../shared/Interfaces';
 import { TodoTitle } from './TodoTitle';
-import { TodoCheckbox } from './TodoCheckbox';
 import { TodoDescription } from './TodoDescription';
 import { TodoDate } from './TodoDate';
 import { DangerButton } from '../../menu/inputs/DangerButton';
@@ -23,7 +22,11 @@ export const TodoWrapper = ({
         title={source.title}
         onSave={(newVal) => onUpdate({ title: newVal })}
       >
-        <TodoCheckbox isDone={source.done} />
+        <input
+          type="checkbox"
+          checked={source.done}
+          onClick={() => onUpdate({ done: !source.done })}
+        />
       </TodoTitle>
       <TodoDescription
         content={source.content || 'No description'}
