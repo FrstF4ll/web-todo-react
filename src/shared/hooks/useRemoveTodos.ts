@@ -17,9 +17,8 @@ export function useRemoveTodos(
       setTodos((currentTodos: Todos[]) =>
         currentTodos.filter((todo) => todo.id !== id),
       );
-    } catch (err: any) {
-      const message = err.message || 'Cannot delete task';
-      setError(message);
+    } catch (err) {
+      setError((err as Error).message || 'Failed to remove task');
       console.error('Delete failed:', err);
     }
   };

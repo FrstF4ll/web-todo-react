@@ -40,8 +40,8 @@ export function useAddTodos(
         due_date: null,
         done: false,
       });
-    } catch (err: any) {
-      setError(err.message || 'Server error: Could not save the todo.');
+    } catch (err) {
+      setError((err as Error).message || 'Failed to save task');
     }
   };
 
