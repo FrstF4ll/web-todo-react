@@ -7,10 +7,15 @@ interface TodoFormProps {
 }
 
 export const TodoForm = ({ children, onSave }: TodoFormProps) => {
+  const handleSubmit = (e: React.SubmitEvent) => {
+    e.preventDefault();
+    onSave();
+  };
+
   return (
     <form
       className={`flex-column ${mainMenuStyles.todoInputs}`}
-      onSubmit={onSave}
+      onSubmit={handleSubmit}
     >
       {children}
     </form>
