@@ -10,7 +10,7 @@ export const FilterOption = ({
   optionClassName,
   selectOption,
 }: FilterOptionsProps) => {
-  const handleSelect = (e: any) => {
+  const handleSelect = (e: React.MouseEvent) => {
     e.stopPropagation();
     selectOption(sortOption);
   };
