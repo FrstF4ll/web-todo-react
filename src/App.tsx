@@ -11,13 +11,18 @@ import type { ClientTodos } from './shared/Interfaces';
 import { getData } from './api/GetData';
 import type { Todos } from './shared/Interfaces';
 import { TodoWrapper } from './ui/todos/items/TodoWrapper';
-import { StatusMessage } from './ui/other/atoms/StatusMessage';
+import { StatusMessage } from './ui/other/message/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
-import { deleteData } from './api/DeleteData';
-import { ErrorMessage } from './ui/other/error/ErrorMessage';
-import { useAddTodos } from './shared/customHooks';
+import { ErrorMessage } from './ui/other/message/ErrorMessage';
+import { useAddTodos } from './shared/hooks/useAddTodos';
 import { useEffect } from 'react';
-import { patchData } from './api/PatchData';
+import { useUpdateTodos } from './shared/hooks/useUpdateTodos';
+import { useRemoveTodos } from './shared/hooks/useRemoveTodos';
+import { FILTER } from './shared/variable';
+import { useFilterTodos } from './shared/hooks/useFilterTodos';
+import { type SortOption } from './shared/hooks/useOptionsDisplay';
+import { useOptionsDisplay } from './shared/hooks/useOptionsDisplay';
+import { useAsyncError } from './shared/hooks/useAsyncError';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -31,15 +36,23 @@ const todosPromise = getData();
 const App = () => {
   const [todos, setTodos] = useState<Todos[]>([]);
   const [formData, setFormData] = useState<ClientTodos>(newTodo);
+  const [filter, setFilter] = useState<SortOption[]>([FILTER.ANY]);
+  const filteredTodos = useFilterTodos(filter, todos);
+  const { toggleOption, getOptionClassName } = useOptionsDisplay(
+    filter,
+    setFilter,
+  );
+  const { error, setError, resetError } = useAsyncError();
 
-  const {
-    handleInputChange,
-    handleAdd,
-    error: addError,
-    setError: setAddError,
-  } = useAddTodos(formData, setTodos, setFormData);
+  const { handleInputChange, handleAdd } = useAddTodos(
+    formData,
+    setTodos,
+    setFormData,
+    setError,
+  );
+  const { handleUpdate } = useUpdateTodos(todos, setTodos, setError);
 
-  const [error, setError] = useState<string | null>(null);
+  const { handleRemove } = useRemoveTodos(setTodos, setError);
 
   useEffect(() => {
     todosPromise
@@ -51,74 +64,14 @@ const App = () => {
       });
   }, []);
 
-  const handleUpdate = async (id: number, changes: Partial<Todos>) => {
-    setError(null);
-
-    if (
-      changes.title !== undefined &&
-      (!changes.title || changes.title.trim() === '')
-    )
-      return;
-
-    if (
-      changes.content !== undefined &&
-      (!changes.content || changes.content.trim() === '')
-    ) {
-      changes.content = 'No description';
-    }
-
-    if (
-      changes.due_date !== undefined &&
-      (!changes.due_date || changes.due_date === '')
-    ) {
-      changes.due_date = null;
-    }
-
-    try {
-      const currentTodo = todos.find((t) => t.id === id);
-      if (!currentTodo) return;
-
-      const updatedTodo = { ...currentTodo, ...changes };
-      const { id: _, ...dataForApi } = updatedTodo;
-
-      await patchData(dataForApi, id);
-
-      setTodos((prevTodos) =>
-        prevTodos.map((t) => (t.id === id ? updatedTodo : t)),
-      );
-    } catch (err: any) {
-      setError(err.message);
-      console.error('Update failed:', err);
-    }
-  };
-
-  const handleRemove = async (id: number) => {
-    try {
-      await deleteData(id);
-      setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
-    } catch (error: any) {
-      setError(error.message);
-      console.error('Cannot delete task : ', error);
-    }
-  };
-
   return (
     <main>
-      {error && <ErrorMessage message={error} onClose={() => setError(null)} />}
-      {addError && (
-        <ErrorMessage
-          message={addError}
-          onClose={() => {
-            setAddError(null);
-          }}
-        />
-      )}
-
+      {error && <ErrorMessage message={error} onClose={() => resetError()} />}
       <MainMenuWrapper>
-        {todos.length === 0 && (
+        {filteredTodos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
         )}
-        <TodoForm>
+        <TodoForm onSave={handleAdd}>
           <div className={mainMenuStyles.inputWrapper}>
             <TodoInputs
               type="text"
@@ -143,9 +96,13 @@ const App = () => {
           <AddTodoButton event={handleAdd} />
         </TodoForm>
       </MainMenuWrapper>
-      <OptionBar />
+      <OptionBar
+        filter={filter}
+        onFilterChange={toggleOption}
+        getOptionClassName={getOptionClassName}
+      />
       <TodosContainer>
-        {todos.map((todo: Todos) => (
+        {filteredTodos.map((todo: Todos) => (
           <TodoWrapper
             key={todo.id}
             source={todo}

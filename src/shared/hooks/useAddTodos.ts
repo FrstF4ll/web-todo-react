@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react';
-import { postData } from '../api/PostData';
-import type { ClientTodos, Todos } from '../shared/Interfaces';
-import { useState } from 'react';
+import { postData } from '../../api/PostData';
+import type { ClientTodos, Todos } from '../../shared/Interfaces';
 
 type StateSetter<T> = Dispatch<SetStateAction<T>>;
 
@@ -9,16 +8,13 @@ export function useAddTodos(
   formData: ClientTodos,
   setTodos: StateSetter<Todos[]>,
   setFormData: StateSetter<ClientTodos>,
+  setError: React.Dispatch<React.SetStateAction<string | null>>,
 ) {
-  const [error, setError] = useState<string | null>(null);
-
   function handleInputChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     const { name, value } = e.target;
     const finalValue = value === '' ? null : value;
-
-    if (error) setError(null);
 
     setFormData({
       ...formData,
@@ -44,15 +40,13 @@ export function useAddTodos(
         due_date: null,
         done: false,
       });
-    } catch (err: any) {
-      setError(err.message || 'Server error: Could not save the todo.');
+    } catch (err) {
+      setError((err as Error).message || 'Failed to save task');
     }
   };
 
   return {
     handleInputChange,
     handleAdd,
-    error,
-    setError,
   };
 }

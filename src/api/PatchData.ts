@@ -1,5 +1,6 @@
 import type { ClientTodos } from '../shared/Interfaces';
 import { TODO_URL } from '../shared/variable';
+import { apiHandleError } from './apiHandleError';
 
 export async function patchData(
   todo: ClientTodos,
@@ -17,6 +18,8 @@ export async function patchData(
       },
       body: JSON.stringify(todo),
     });
+
+    await apiHandleError(response);
     const responseFile = await response.json();
     if (!Array.isArray(responseFile) || responseFile.length === 0) {
       throw new Error(
@@ -27,6 +30,6 @@ export async function patchData(
     return unwrappedData;
   } catch (error) {
     console.error(error);
-    throw new Error(`'Failed to modify todo: ${(error as Error).message}'`);
+    throw new Error(`Failed to modify todo: ${(error as Error).message}`);
   }
 }
