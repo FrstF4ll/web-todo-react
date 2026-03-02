@@ -23,6 +23,6 @@ export async function postData(todo: ClientTodos): Promise<Todos> {
     const unwrappedData = responseFile[0] as Todos;
     return unwrappedData;
   } catch (error) {
-    throw new Error(`Failed to send datas : ${(error as Error).message}`);
+    throw new Error(`Failed to send data: ${(error as Error).message}`);
   }
 }
