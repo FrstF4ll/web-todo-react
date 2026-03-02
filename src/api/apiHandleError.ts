@@ -12,7 +12,5 @@ export async function apiHandleError(response: Response): Promise<Response> {
     serverErrorMessage = await response.text().catch(() => response.statusText);
   }
 
-  throw new Error(
-    `Failed to access server [${response.status}]: ${serverErrorMessage}`,
-  );
+  throw new Error(`${response.status}, ${serverErrorMessage}`);
 }
