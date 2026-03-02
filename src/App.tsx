@@ -18,6 +18,10 @@ import { useAddTodos } from './shared/hooks/useAddTodos';
 import { useEffect } from 'react';
 import { useUpdateTodos } from './shared/hooks/useUpdateTodos';
 import { useRemoveTodos } from './shared/hooks/useRemoveTodos';
+import { FILTER } from './shared/variable';
+import { useFilterTodos } from './shared/hooks/useFilterTodos';
+import { type SortOption } from './shared/hooks/useOptionsDisplay';
+import { useOptionsDisplay } from './shared/hooks/useOptionsDisplay';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -32,6 +36,12 @@ const App = () => {
   const [todos, setTodos] = useState<Todos[]>([]);
   const [formData, setFormData] = useState<ClientTodos>(newTodo);
   const [error, setError] = useState<string | null>(null);
+  const [filter, setFilter] = useState<SortOption[]>([FILTER.ANY]);
+  const filteredTodos = useFilterTodos(filter, todos);
+  const { toggleOption, getOptionClassName } = useOptionsDisplay(
+    filter,
+    setFilter,
+  );
 
   const {
     handleInputChange,
@@ -85,7 +95,7 @@ const App = () => {
         />
       )}
       <MainMenuWrapper>
-        {todos.length === 0 && (
+        {filteredTodos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
         )}
         <TodoForm onSave={handleAdd}>
@@ -113,9 +123,13 @@ const App = () => {
           <AddTodoButton event={handleAdd} />
         </TodoForm>
       </MainMenuWrapper>
-      <OptionBar />
+      <OptionBar
+        filter={filter}
+        onFilterChange={toggleOption}
+        getOptionClassName={getOptionClassName}
+      />
       <TodosContainer>
-        {todos.map((todo: Todos) => (
+        {filteredTodos.map((todo: Todos) => (
           <TodoWrapper
             key={todo.id}
             source={todo}

@@ -17,6 +17,8 @@ export const EditableContent = ({
 }: EditableContentProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(value);
+  const [year, month, day] = value.split('-');
+  const formatted = `${day}/${month}/${year}`;
 
   useEffect(() => {
     setDraft(value);
@@ -34,11 +36,10 @@ export const EditableContent = ({
       value={type === 'date' && !/^\d{4}-\d{2}-\d{2}$/.test(draft) ? '' : draft}
       onChange={(e) => setDraft(e.target.value)}
       onBlur={handleBlur}
-      onKeyDown={(e) => e.key === 'Enter' && handleBlur()}
     />
   ) : (
     <Tag onClick={() => setIsEditing(true)} style={{ cursor: 'pointer' }}>
-      {value}
+      {type === 'date' ? formatted : value}{' '}
     </Tag>
   );
 };

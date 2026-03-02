@@ -2,22 +2,25 @@ import { useState } from 'react';
 import { FilterLayout } from './FilterLayout';
 import { FilterValueContainer } from './FilterValueContainer';
 import styles from './TodoFilter.module.css';
-import { useOptionsDisplay } from '../../../../shared/hooks/useOptionsDisplay';
 import { FilterOption } from './FilterOption';
 import { SORT_OPTIONS } from '../../../../shared/hooks/useOptionsDisplay';
 import type { SortOption } from '../../../../shared/hooks/useOptionsDisplay';
 
-export const FilterContainer = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<SortOption[]>([SORT_OPTIONS[0]]);
+interface FilterContainerProps {
+  selected: SortOption[];
+  onSelect: (option: SortOption) => void;
+  getOptionClassName: (option: SortOption) => string;
+}
 
-  const { toggleOption, getOptionClassName } = useOptionsDisplay(
-    selected,
-    setSelected,
-  );
+export const FilterContainer = ({
+  selected,
+  onSelect,
+  getOptionClassName,
+}: FilterContainerProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option: SortOption) => {
-    toggleOption(option);
+    onSelect(option);
     setIsOpen(false);
   };
 
@@ -31,7 +34,7 @@ export const FilterContainer = () => {
       <FilterLayout>
         <span className={styles.label}>Sort:</span>
         <span className={styles.currentText}>
-          <span className={styles.currentText}>{selected.join(', ')}</span>
+          <span className={styles.currentText}>{selected}</span>
         </span>
         {isOpen && (
           <FilterValueContainer>
