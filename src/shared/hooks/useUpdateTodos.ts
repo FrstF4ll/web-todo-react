@@ -1,13 +1,11 @@
-import { useState } from 'react';
 import type { Todos } from '../Interfaces';
 import { patchData } from '../../api/PatchData';
 
 export function useUpdateTodos(
   todos: Todos[],
   setTodos: React.Dispatch<React.SetStateAction<Todos[]>>,
+  setError: React.Dispatch<React.SetStateAction<string | null>>,
 ) {
-  const [error, setError] = useState<string | null>(null);
-
   const handleUpdate = async (id: number, changes: Partial<Todos>) => {
     setError(null);
 
@@ -43,14 +41,11 @@ export function useUpdateTodos(
       setTodos((prevTodos) =>
         prevTodos.map((t) => (t.id === id ? updatedTodo : t)),
       );
-    } catch (err: any) {
-      setError(err.message);
-      console.error('Update failed:', err);
+    } catch (err) {
+      setError((err as Error).message || 'Update failed');
     }
   };
   return {
-    error,
     handleUpdate,
-    setError,
   };
 }

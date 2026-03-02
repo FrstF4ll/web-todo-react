@@ -2,13 +2,13 @@ import type { SetStateAction } from 'react';
 import { deleteData } from '../../api/DeleteData';
 import type { Dispatch } from 'react';
 import type { Todos } from '../Interfaces';
-import { useState } from 'react';
 
 type StateSetter<T> = Dispatch<SetStateAction<T>>;
 
-export function useRemoveTodos(setTodos: StateSetter<Todos[]>) {
-  const [error, setError] = useState<string | null>(null);
-
+export function useRemoveTodos(
+  setTodos: StateSetter<Todos[]>,
+  setError: React.Dispatch<React.SetStateAction<string | null>>,
+) {
   const handleRemove = async (id: number) => {
     setError(null);
     try {
@@ -26,7 +26,5 @@ export function useRemoveTodos(setTodos: StateSetter<Todos[]>) {
 
   return {
     handleRemove,
-    error,
-    setError,
   };
 }

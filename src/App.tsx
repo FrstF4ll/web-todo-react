@@ -22,6 +22,7 @@ import { FILTER } from './shared/variable';
 import { useFilterTodos } from './shared/hooks/useFilterTodos';
 import { type SortOption } from './shared/hooks/useOptionsDisplay';
 import { useOptionsDisplay } from './shared/hooks/useOptionsDisplay';
+import { useAsyncError } from './shared/hooks/useAsyncError';
 
 const newTodo: ClientTodos = {
   title: '',
@@ -35,31 +36,23 @@ const todosPromise = getData();
 const App = () => {
   const [todos, setTodos] = useState<Todos[]>([]);
   const [formData, setFormData] = useState<ClientTodos>(newTodo);
-  const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<SortOption[]>([FILTER.ANY]);
   const filteredTodos = useFilterTodos(filter, todos);
   const { toggleOption, getOptionClassName } = useOptionsDisplay(
     filter,
     setFilter,
   );
+  const { error, setError, resetError } = useAsyncError();
 
-  const {
-    handleInputChange,
-    handleAdd,
-    error: addError,
-    setError: setAddError,
-  } = useAddTodos(formData, setTodos, setFormData);
-  const {
-    error: updateError,
-    setError: setUpdateError,
-    handleUpdate,
-  } = useUpdateTodos(todos, setTodos);
+  const { handleInputChange, handleAdd } = useAddTodos(
+    formData,
+    setTodos,
+    setFormData,
+    setError,
+  );
+  const { handleUpdate } = useUpdateTodos(todos, setTodos, setError);
 
-  const {
-    error: removeError,
-    setError: setRemoveError,
-    handleRemove,
-  } = useRemoveTodos(setTodos);
+  const { handleRemove } = useRemoveTodos(setTodos, setError);
 
   useEffect(() => {
     todosPromise
@@ -73,27 +66,7 @@ const App = () => {
 
   return (
     <main>
-      {error && <ErrorMessage message={error} onClose={() => setError(null)} />}
-      {addError && (
-        <ErrorMessage
-          message={addError}
-          onClose={() => {
-            setAddError(null);
-          }}
-        />
-      )}
-      {updateError && (
-        <ErrorMessage
-          message={`Update failed: ${updateError}`}
-          onClose={() => setUpdateError(null)}
-        />
-      )}
-      {removeError && (
-        <ErrorMessage
-          message={`Deletion failed: ${removeError}`}
-          onClose={() => setRemoveError(null)}
-        />
-      )}
+      {error && <ErrorMessage message={error} onClose={() => resetError()} />}
       <MainMenuWrapper>
         {filteredTodos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
