@@ -4,8 +4,8 @@ import { FilterValueContainer } from './FilterValueContainer';
 import styles from './TodoFilter.module.css';
 import { useOptionsDisplay } from '../../../../shared/hooks/useOptionsDisplay';
 import { FilterOption } from './FilterOption';
-const SORT_OPTIONS = ['Any', 'Name', 'Date', 'Undone', 'Done'] as const;
-export type SortOption = (typeof SORT_OPTIONS)[number];
+import { SORT_OPTIONS } from '../../../../shared/hooks/useOptionsDisplay';
+import type { SortOption } from '../../../../shared/hooks/useOptionsDisplay';
 
 export const FilterContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
