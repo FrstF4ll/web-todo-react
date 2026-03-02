@@ -40,6 +40,7 @@ export const FilterContainer = ({
           <FilterValueContainer>
             {SORT_OPTIONS.map((option) => (
               <FilterOption
+                key={option}
                 sortOption={option}
                 optionClassName={getOptionClassName}
                 selectOption={handleSelect}
