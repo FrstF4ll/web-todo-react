@@ -34,7 +34,7 @@ export const FilterContainer = ({
       <FilterLayout>
         <span className={styles.label}>Sort:</span>
         <span className={styles.currentText}>
-          <span className={styles.currentText}>{selected}</span>
+          <span className={styles.currentText}>{selected.join(', ')}</span>
         </span>
         {isOpen && (
           <FilterValueContainer>
