@@ -17,9 +17,10 @@ export const EditableContent = ({
 }: EditableContentProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(value);
-  const [year, month, day] = value.split('-');
-  const formatted = `${day}/${month}/${year}`;
-
+  let formatted = value;
+  if (value && value.includes('-')) {
+    formatted = value.split('-').reverse().join('/');
+  }
   useEffect(() => {
     setDraft(value);
   }, [value]);
@@ -33,13 +34,13 @@ export const EditableContent = ({
     <input
       autoFocus
       type={type}
-      value={type === 'date' && !/^\d{4}-\d{2}-\d{2}$/.test(draft) ? '' : draft}
+      value={draft}
       onChange={(e) => setDraft(e.target.value)}
       onBlur={handleBlur}
     />
   ) : (
     <Tag onClick={() => setIsEditing(true)} style={{ cursor: 'pointer' }}>
-      {type === 'date' ? formatted : value}{' '}
+      {type === 'date' ? formatted : value}
     </Tag>
   );
 };
