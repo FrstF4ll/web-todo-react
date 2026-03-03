@@ -42,7 +42,7 @@ flowchart LR
     style FilterStore fill:#f9f,stroke:#333
     style FormStore fill:#bbf,stroke:#333
     style API fill:#fff3e0,stroke:#ff6f00
-    ```
+```
 
 ## Setup
 
@@ -50,7 +50,7 @@ Install the dependencies:
 
 ```bash
 pnpm install
-````
+```
 
 ## Get started
 
