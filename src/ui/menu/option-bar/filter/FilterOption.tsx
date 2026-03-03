@@ -1,4 +1,4 @@
-import type { SortOption } from '../../../../shared/hooks/useOptionsDisplay';
+import type { SortOption } from "../../../../useFilterStore";
 interface FilterOptionsProps {
   sortOption: SortOption;
   optionClassName: (sortOption: SortOption) => string;
