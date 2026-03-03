@@ -6,7 +6,6 @@ import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
 import { TodoForm } from './ui/menu/inputs/TodoForm';
 import { TodoInputs } from './ui/menu/inputs/TodoInputs';
 import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
-import { useState } from 'react';
 import { getData } from './api/GetData';
 import type { Todos } from './shared/Interfaces';
 import { TodoWrapper } from './ui/todos/items/TodoWrapper';
@@ -14,11 +13,9 @@ import { StatusMessage } from './ui/other/message/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { ErrorMessage } from './ui/other/message/ErrorMessage';
 import { useEffect } from 'react';
-import { FILTER } from './shared/variable';
-import { useFilterTodos } from './shared/hooks/useFilterTodos';
-import { type SortOption } from './shared/hooks/useOptionsDisplay';
-import { useOptionsDisplay } from './shared/hooks/useOptionsDisplay';
 import { useFormStore } from './useFormStore';
+import { useFilterStore } from './useFilterStore';
+import { useShallow } from 'zustand/shallow';
 
 const todosPromise = getData();
 
@@ -32,13 +29,12 @@ const App = () => {
   const handleUpdate = useFormStore((s) => s.handleUpdate);
   const setError = useFormStore((s) => s.setError);
   const error = useFormStore((s) => s.error);
-
-  const [filter, setFilter] = useState<SortOption[]>([FILTER.ANY]);
-  const filteredTodos = useFilterTodos(filter, todos);
-  const { toggleOption, getOptionClassName } = useOptionsDisplay(
-    filter,
-    setFilter,
+  const filteredTodos = useFilterStore(
+    useShallow((state) => state.filterTodos(todos)),
   );
+  const getOptionClassName = useFilterStore((s) => s.getOptionClassName);
+  const sorting = useFilterStore((s) => s.sorting);
+  const setSorting = useFilterStore((s) => s.setSorting);
 
   useEffect(() => {
     todosPromise
@@ -56,7 +52,7 @@ const App = () => {
         <ErrorMessage message={error.message} onClose={() => setError(null)} />
       )}
       <MainMenuWrapper>
-        {filteredTodos.length === 0 && (
+        {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
         )}
         <TodoForm onSave={handleAdd}>
@@ -85,8 +81,8 @@ const App = () => {
         </TodoForm>
       </MainMenuWrapper>
       <OptionBar
-        filter={filter}
-        onFilterChange={toggleOption}
+        filter={sorting}
+        onFilterChange={setSorting}
         getOptionClassName={getOptionClassName}
       />
       <TodosContainer>

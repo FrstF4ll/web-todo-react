@@ -1,8 +1,7 @@
-import type { SortOption } from '../../../shared/hooks/useOptionsDisplay';
 import { DangerButton } from '../inputs/DangerButton';
 import { FilterContainer } from './filter/FilterContainer';
 import styles from './OptionBar.module.css';
-
+import type { SortOption } from '../../../useFilterStore';
 interface OptionBarProps {
   filter: SortOption[];
   onFilterChange: (option: SortOption) => void;
