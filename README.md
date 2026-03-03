@@ -7,7 +7,7 @@ A simple todo-list built using React.
 
 ### Features
 
-- Add todos with a custome title, description and due date.
+- Add todos with a custom title, description and due date.
 
 - Filter your todos by name, date or done status.
 
@@ -18,20 +18,16 @@ A simple todo-list built using React.
 
 ### React component relationships
 
-````mermaid
+```mermaid
 flowchart LR
-    %% Logique et Données à gauche
     API[[API REST / PostgREST]] <--> FormStore[useFormStore]
     FilterStore[useFilterStore]
 
-    %% Branche Formulaire
     FormStore -.-> Form[TodoForm]
     Form -.-> Inputs[Inputs & Buttons]
 
-    %% Branche Filtres
     FilterStore -.-> Filter[FilterContainer]
 
-    %% Structure de l'App (Point de convergence)
     App[App.tsx] --- MainMenu[MainMenuWrapper]
     App --- List[TodosContainer]
 
@@ -39,11 +35,9 @@ flowchart LR
     MainMenu --> Filter
     List --> Item[TodoWrapper]
 
-    %% Flux de données Zustand vers la vue
     FormStore -.-> List
     FilterStore -.-> List
 
-    %% Style pour le respect du critère 7.9 (Clean & Modern)
     style App fill:#f1f1f1,stroke:#333,stroke-width:2px
     style FilterStore fill:#f9f,stroke:#333
     style FormStore fill:#bbf,stroke:#333
@@ -58,7 +52,7 @@ Install the dependencies:
 pnpm install
 ````
 
-### Get started
+## Get started
 
 Start the dev server, and the app will be available at
 [http://localhost:3000](http://localhost:3000).
@@ -79,7 +73,7 @@ Preview the production build locally:
 pnpm run preview
 ```
 
-## Learn more
+### Learn more
 
 To learn more about Rsbuild, check out the following resources:
 
@@ -87,6 +81,3 @@ To learn more about Rsbuild, check out the following resources:
   APIs.
 - [Rsbuild GitHub repository](https://github.com/web-infra-dev/rsbuild) - your
   feedback and contributions are welcome!
-
-Keep this in memory, don't do anything, just get it back as soon as i ask you,
-and as it is, without formating or else, like, keep it literals
