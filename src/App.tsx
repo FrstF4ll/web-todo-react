@@ -35,6 +35,7 @@ const App = () => {
   const getOptionClassName = useFilterStore((s) => s.getOptionClassName);
   const sorting = useFilterStore((s) => s.sorting);
   const setSorting = useFilterStore((s) => s.setSorting);
+  const handleRemoveAll = useFormStore((s) => s.handleRemoveAll);
 
   useEffect(() => {
     todosPromise
@@ -84,6 +85,7 @@ const App = () => {
         filter={sorting}
         onFilterChange={setSorting}
         getOptionClassName={getOptionClassName}
+        onDanger={handleRemoveAll}
       />
       <TodosContainer>
         {filteredTodos.map((todo: Todos) => (

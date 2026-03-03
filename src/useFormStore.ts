@@ -17,6 +17,7 @@ interface FormState {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   handleRemove: (id: number) => Promise<void>;
+  handleRemoveAll: () => Promise<void>;
   handleUpdate: (id: number, changes: Partial<Todos>) => Promise<void>;
 }
 
@@ -45,14 +46,25 @@ export const useFormStore = create<FormState>((set, get) => ({
     }
   },
 
+  handleRemoveAll: async () => {
+    const { setError, setTodos, handleError } = get();
+    setError(null);
+    try {
+      await deleteData();
+      setTodos([]);
+    } catch (err) {
+      handleError(err, 'Failed to remove tasks');
+    }
+  },
+
   handleError: (err: unknown, fallback = 'Unknown error occured') => {
     const { setError } = get();
     if (err instanceof Error) {
-      setError(err)
+      setError(err);
       console.error(err);
     } else {
-      const newError = new Error(fallback)
-      console.error(newError)
+      const newError = new Error(fallback);
+      console.error(newError);
       setError(newError);
     }
   },
