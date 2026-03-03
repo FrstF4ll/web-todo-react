@@ -7,7 +7,7 @@ interface OptionBarProps {
   filter: SortOption[];
   onFilterChange: (option: SortOption) => void;
   getOptionClassName: (option: SortOption) => string;
-  onDanger: () => Promise<void>
+  onDanger: () => Promise<void>;
 }
 
 export const OptionBar = ({
@@ -15,13 +15,25 @@ export const OptionBar = ({
   onFilterChange,
   getOptionClassName,
   onDanger,
-}: OptionBarProps) => (
-  <nav className={`flex-row ${styles.optionBar}`}>
-    <FilterContainer
-      selected={filter}
-      onSelect={onFilterChange}
-      getOptionClassName={getOptionClassName}
-    />
-    <DangerButton text="Clear all" aria-label="Delete everything" onClick={onDanger}/>
-  </nav>
-);
+}: OptionBarProps) => {
+  const handleDangerClick = () => {
+    if (window.confirm('Everything will be lost, are you sure?')) {
+      onDanger();
+    }
+  };
+
+  return (
+    <nav className={`flex-row ${styles.optionBar}`}>
+      <FilterContainer
+        selected={filter}
+        onSelect={onFilterChange}
+        getOptionClassName={getOptionClassName}
+      />
+      <DangerButton
+        text="Clear all"
+        aria-label="Delete everything"
+        onClick={handleDangerClick}
+      />
+    </nav>
+  );
+};

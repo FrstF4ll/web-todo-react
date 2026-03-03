@@ -50,10 +50,8 @@ export const useFormStore = create<FormState>((set, get) => ({
     const { setError, setTodos, handleError } = get();
     setError(null);
     try {
-      if (window.confirm("Everything will be lost, are you sure ?")) {
-        await deleteData();
-        setTodos([]);
-      }
+      await deleteData();
+      setTodos([]);
     } catch (err) {
       handleError(err, 'Failed to remove tasks');
     }
@@ -62,11 +60,11 @@ export const useFormStore = create<FormState>((set, get) => ({
   handleError: (err: unknown, fallback = 'Unknown error occured') => {
     const { setError } = get();
     if (err instanceof Error) {
-      setError(err)
+      setError(err);
       console.error(err);
     } else {
-      const newError = new Error(fallback)
-      console.error(newError)
+      const newError = new Error(fallback);
+      console.error(newError);
       setError(newError);
     }
   },
