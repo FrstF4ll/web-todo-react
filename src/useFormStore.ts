@@ -13,7 +13,9 @@ interface FormState {
   handleAdd: () => void;
   formData: ClientTodos;
   setFormData: (d: ClientTodos) => void;
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   handleRemove: (id: number) => any;
   handleUpdate: (id: number, changes: Partial<Todos>) => Promise<void>;
 }

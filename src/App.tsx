@@ -75,7 +75,7 @@ const App = () => {
             placeholder="Enter description"
             name="content"
             value={formData.content ?? ''}
-            event={() => handleInputChange}
+            event={handleInputChange}
           />
           <AddTodoButton event={handleAdd} />
         </TodoForm>
