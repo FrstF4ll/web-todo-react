@@ -6,7 +6,6 @@ interface FilterState {
   sorting: SortOption[];
   compareByName: (a: Todos, b: Todos) => number;
   compareByDate: (a: Todos, b: Todos) => number;
-  filterTodos: (todos: Todos[]) => Todos[];
   setSorting: (options: SortOption) => void;
   getOptionClassName: (option: SortOption) => string;
 }
@@ -35,19 +34,6 @@ export const useFilterStore = create<FilterState>((set, get) => ({
     const timeA = a.due_date ? new Date(a.due_date).getTime() : Infinity;
     const timeB = b.due_date ? new Date(b.due_date).getTime() : Infinity;
     return timeA - timeB;
-  },
-
-  filterTodos: (todos: Todos[]) => {
-    const { sorting, compareByName, compareByDate } = get();
-    let result = [...(todos || [])];
-
-    if (sorting.includes(FILTER.DONE)) result = result.filter((t) => t.done);
-    if (sorting.includes(FILTER.NOT_DONE))
-      result = result.filter((t) => !t.done);
-
-    if (sorting.includes(FILTER.BY_NAME)) result.sort(compareByName);
-    if (sorting.includes(FILTER.BY_DATE)) result.sort(compareByDate);
-    return result;
   },
 
   setSorting: (option: SortOption) =>
