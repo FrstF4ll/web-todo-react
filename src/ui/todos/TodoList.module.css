@@ -1,25 +1,36 @@
+:root {
+  --bg-card: #ffffff;
+  --bg-item: #f5f5f0;
+  --text-item: #262626;
+  --border-color: #e5e7eb;
+
+  --radius-xl: 0.9375rem;
+  --spacing-md: 0.625rem;
+  --spacing-lg: 0.9375rem;
+}
+
 .todoList {
-  gap: 10px;
+  gap: var(--spacing-md);
   grid-column: 3;
   grid-row: 4;
   list-style: none;
   height: 50vh;
-  border: solid 1px #e5e7eb;
-  background-color: #ffffff;
-  border-radius: 15px;
+  border: 0.0625rem solid var(--border-color);
+  background-color: var(--bg-card);
+  border-radius: var(--radius-xl);
 }
 
 .todoItem {
-  background-color: #f5f5f0;
-  color: #262626;
+  background-color: var(--bg-item);
+  color: var(--text-item);
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  border-radius: 15px;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-xl);
 }
 
 .todoItem > * {
   display: flex;
-  gap: 15px;
+  gap: var(--spacing-lg);
   align-items: center;
 }

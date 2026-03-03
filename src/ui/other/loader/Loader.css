@@ -1,26 +1,37 @@
+:root {
+  --border-spinner-base: rgba(0, 0, 0, 0.1);
+  --border-spinner-top: #3498db;
+  --text-loader: #666;
+
+  --size-spinner: 2rem;
+  --spacing-loader: 2rem;
+  --gap-loader: 1rem;
+  --font-size-loader: 0.9rem;
+  --border-width-spinner: 0.1875rem;
+}
+
 .loader-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  gap: 1rem;
-  /* Optionnel : pour qu'il apparaisse en fondu doucement */
+  padding: var(--spacing-loader);
+  gap: var(--gap-loader);
   animation: fadeIn 0.5s ease-in-out;
 }
 
 .spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-top: 3px solid #3498db; /* Tu peux mettre ta couleur ici */
+  width: var(--size-spinner);
+  height: var(--size-spinner);
+  border: var(--border-width-spinner) solid var(--border-spinner-base);
+  border-top: var(--border-width-spinner) solid var(--border-spinner-top);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 .loader-container p {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: var(--font-size-loader);
+  color: var(--text-loader);
   font-family: sans-serif;
 }
 

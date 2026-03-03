@@ -1,9 +1,15 @@
+:root {
+  --bg-options: #ffffff;
+  --radius-lg: 0.9375rem;
+  --spacing-md: 0.9375rem;
+}
+
 .optionBar {
   grid-column: 3;
   grid-row: 3;
-  padding: 15px;
-  background-color: #ffffff;
+  padding: var(--spacing-md);
+  background-color: var(--bg-options);
   justify-content: space-between;
   align-items: center;
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
 }

@@ -1,3 +1,21 @@
+:root {
+  --bg-main: #f3f2ee;
+  --bg-input: #f9fafb;
+  --bg-danger: #fee2e2;
+
+  --text-main: #1f2937;
+  --text-input: #111827;
+  --text-danger: #ef4444;
+
+  --border-color: #e5e7eb;
+  --shadow-color: #111827;
+
+  --spacing-xs: 0.1875rem;
+  --spacing-sm: 0.3125rem;
+  --gap-md: 0.625rem;
+  --radius-md: 0.625rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,16 +26,22 @@ body {
   margin: 0;
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
-  background-color: #f3f2ee;
-  color: #1f2937;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+main {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  grid-template-rows: repeat(4, auto);
+  row-gap: var(--gap-md);
 }
 
 input,
 textarea {
-  background-color: #f9fafb;
-  color: #111827;
-  border: solid 1px #e5e7eb;
-  padding: 3px;
+  background-color: var(--bg-input);
+  color: var(--text-input);
+  border: solid 1px var(--border-color);
+  padding: var(--spacing-xs);
 }
 
 button {
@@ -26,7 +50,7 @@ button {
 
 button:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0px #111827;
+  box-shadow: 0 1px 0px var(--shadow-color);
 }
 
 .flex-row,
@@ -46,17 +70,10 @@ button:active {
   display: none;
 }
 
-main {
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-template-rows: repeat(4, auto);
-  row-gap: 10px;
-}
-
 .danger-button {
-  background-color: #fee2e2;
-  color: #ef4444;
+  background-color: var(--bg-danger);
+  color: var(--text-danger);
   height: auto;
-  padding: 5px;
-  border-radius: 10px;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
 }

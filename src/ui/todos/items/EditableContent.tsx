@@ -18,7 +18,7 @@ export const EditableContent = ({
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState(value);
   let formatted = value;
-  if (value && value.includes('-')) {
+  if (value && type === 'date') {
     formatted = value.split('-').reverse().join('/');
   }
   useEffect(() => {

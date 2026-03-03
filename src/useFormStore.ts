@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { postData } from './api/PostData';
 import { deleteData } from './api/DeleteData';
 import { patchData } from './api/PatchData';
+import { getData } from './api/GetData';
 import type { ClientTodos, Todos } from './shared/Interfaces';
 
 interface FormState {
@@ -19,6 +20,7 @@ interface FormState {
   handleRemove: (id: number) => Promise<void>;
   handleRemoveAll: () => Promise<void>;
   handleUpdate: (id: number, changes: Partial<Todos>) => Promise<void>;
+  fetchTodos: () => Promise<void>;
 }
 
 export const useFormStore = create<FormState>((set, get) => ({
@@ -33,6 +35,16 @@ export const useFormStore = create<FormState>((set, get) => ({
   // Errors
   error: null,
   setError: (err) => set({ error: err }),
+
+  // Initialization
+  fetchTodos: async () => {
+    try {
+      const data = await getData();
+      set({ todos: data });
+    } catch (err) {
+      get().handleError(err, 'Erreur de chargement');
+    }
+  },
 
   // Handler
   handleRemove: async (id: number) => {
@@ -127,9 +139,7 @@ export const useFormStore = create<FormState>((set, get) => ({
       if (!currentTodo) return;
 
       const updatedTodo = { ...currentTodo, ...changes };
-      const { id: _, ...dataForApi } = updatedTodo;
-
-      await patchData(dataForApi, id);
+      await patchData(updatedTodo, id);
 
       setTodos(todos.map((t) => (t.id === id ? updatedTodo : t)));
     } catch (err) {
