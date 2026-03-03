@@ -3,9 +3,7 @@ import { FilterLayout } from './FilterLayout';
 import { FilterValueContainer } from './FilterValueContainer';
 import styles from './TodoFilter.module.css';
 import { FilterOption } from './FilterOption';
-import { SORT_OPTIONS } from '../../../../shared/hooks/useOptionsDisplay';
-import type { SortOption } from '../../../../shared/hooks/useOptionsDisplay';
-
+import { type SortOption, SORT_OPTIONS } from '../../../../useFilterStore';
 interface FilterContainerProps {
   selected: SortOption[];
   onSelect: (option: SortOption) => void;

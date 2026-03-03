@@ -6,53 +6,35 @@ import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
 import { TodoForm } from './ui/menu/inputs/TodoForm';
 import { TodoInputs } from './ui/menu/inputs/TodoInputs';
 import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
-import { useState } from 'react';
-import type { ClientTodos } from './shared/Interfaces';
 import { getData } from './api/GetData';
 import type { Todos } from './shared/Interfaces';
 import { TodoWrapper } from './ui/todos/items/TodoWrapper';
 import { StatusMessage } from './ui/other/message/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { ErrorMessage } from './ui/other/message/ErrorMessage';
-import { useAddTodos } from './shared/hooks/useAddTodos';
 import { useEffect } from 'react';
-import { useUpdateTodos } from './shared/hooks/useUpdateTodos';
-import { useRemoveTodos } from './shared/hooks/useRemoveTodos';
-import { FILTER } from './shared/variable';
-import { useFilterTodos } from './shared/hooks/useFilterTodos';
-import { type SortOption } from './shared/hooks/useOptionsDisplay';
-import { useOptionsDisplay } from './shared/hooks/useOptionsDisplay';
-import { useAsyncError } from './shared/hooks/useAsyncError';
-
-const newTodo: ClientTodos = {
-  title: '',
-  content: '',
-  due_date: null,
-  done: false,
-};
+import { useFormStore } from './useFormStore';
+import { useFilterStore } from './useFilterStore';
+import { useShallow } from 'zustand/shallow';
 
 const todosPromise = getData();
 
 const App = () => {
-  const [todos, setTodos] = useState<Todos[]>([]);
-  const [formData, setFormData] = useState<ClientTodos>(newTodo);
-  const [filter, setFilter] = useState<SortOption[]>([FILTER.ANY]);
-  const filteredTodos = useFilterTodos(filter, todos);
-  const { toggleOption, getOptionClassName } = useOptionsDisplay(
-    filter,
-    setFilter,
+  const formData = useFormStore((s) => s.formData);
+  const handleInputChange = useFormStore((s) => s.handleInputChange);
+  const handleAdd = useFormStore((s) => s.handleAdd);
+  const setTodos = useFormStore((s) => s.setTodos);
+  const todos = useFormStore((s) => s.todos);
+  const handleRemove = useFormStore((s) => s.handleRemove);
+  const handleUpdate = useFormStore((s) => s.handleUpdate);
+  const setError = useFormStore((s) => s.setError);
+  const error = useFormStore((s) => s.error);
+  const filteredTodos = useFilterStore(
+    useShallow((state) => state.filterTodos(todos)),
   );
-  const { error, setError, resetError } = useAsyncError();
-
-  const { handleInputChange, handleAdd } = useAddTodos(
-    formData,
-    setTodos,
-    setFormData,
-    setError,
-  );
-  const { handleUpdate } = useUpdateTodos(todos, setTodos, setError);
-
-  const { handleRemove } = useRemoveTodos(setTodos, setError);
+  const getOptionClassName = useFilterStore((s) => s.getOptionClassName);
+  const sorting = useFilterStore((s) => s.sorting);
+  const setSorting = useFilterStore((s) => s.setSorting);
 
   useEffect(() => {
     todosPromise
@@ -66,9 +48,11 @@ const App = () => {
 
   return (
     <main>
-      {error && <ErrorMessage message={error} onClose={() => resetError()} />}
+      {error && (
+        <ErrorMessage message={error.message} onClose={() => setError(null)} />
+      )}
       <MainMenuWrapper>
-        {filteredTodos.length === 0 && (
+        {todos.length === 0 && (
           <StatusMessage statusMessage="No tasks to complete !" />
         )}
         <TodoForm onSave={handleAdd}>
@@ -97,8 +81,8 @@ const App = () => {
         </TodoForm>
       </MainMenuWrapper>
       <OptionBar
-        filter={filter}
-        onFilterChange={toggleOption}
+        filter={sorting}
+        onFilterChange={setSorting}
         getOptionClassName={getOptionClassName}
       />
       <TodosContainer>
