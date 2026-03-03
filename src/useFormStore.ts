@@ -16,7 +16,7 @@ interface FormState {
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
-  handleRemove: (id: number) => any;
+  handleRemove: (id: number) => Promise<void>;
   handleUpdate: (id: number, changes: Partial<Todos>) => Promise<void>;
 }
 
@@ -47,14 +47,14 @@ export const useFormStore = create<FormState>((set, get) => ({
 
   handleError: (err: unknown, fallback = 'Unknown error occured') => {
     const { setError } = get();
-    let error = new Error();
     if (err instanceof Error) {
-      error = new Error(err.message);
+      setError(err)
       console.error(err);
     } else {
-      error = new Error(fallback);
+      const newError = new Error(fallback)
+      console.error(newError)
+      setError(newError);
     }
-    setError(error);
   },
 
   handleInputChange: (e) => {
