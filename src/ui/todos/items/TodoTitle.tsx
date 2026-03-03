@@ -13,7 +13,7 @@ export const TodoTitle = ({ title, onSave, children }: TodoTitleProps) => {
       <EditableContent
         value={title}
         type="text"
-        onSave={(newVal: string) => onSave(newVal)}
+        onSave={onSave}
       />
     </span>
   );
