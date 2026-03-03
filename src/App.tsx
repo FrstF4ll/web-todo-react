@@ -13,7 +13,6 @@ import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { ErrorMessage } from './ui/other/message/ErrorMessage';
 import { useFormStore } from './useFormStore';
 import { useFilterStore } from './useFilterStore';
-import { useShallow } from 'zustand/shallow';
 import { useEffect } from 'react';
 
 const App = () => {
@@ -25,18 +24,16 @@ const App = () => {
   const handleUpdate = useFormStore((s) => s.handleUpdate);
   const setError = useFormStore((s) => s.setError);
   const error = useFormStore((s) => s.error);
-  const filteredTodos = useFilterStore(
-    useShallow((state) => state.filterTodos(todos)),
-  );
+
   const fetchTodos = useFormStore((s) => s.fetchTodos);
   const getOptionClassName = useFilterStore((s) => s.getOptionClassName);
   const sorting = useFilterStore((s) => s.sorting);
   const setSorting = useFilterStore((s) => s.setSorting);
   const handleRemoveAll = useFormStore((s) => s.handleRemoveAll);
 
-useEffect(() => {
-  fetchTodos();
-}, [fetchTodos]);
+  useEffect(() => {
+    fetchTodos();
+  }, [fetchTodos]);
 
   return (
     <main>
@@ -79,7 +76,7 @@ useEffect(() => {
         onDanger={handleRemoveAll}
       />
       <TodosContainer>
-        {filteredTodos.map((todo: Todos) => (
+        {todos.map((todo: Todos) => (
           <TodoWrapper
             key={todo.id}
             source={todo}

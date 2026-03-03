@@ -20,7 +20,7 @@ interface FormState {
   handleRemove: (id: number) => Promise<void>;
   handleRemoveAll: () => Promise<void>;
   handleUpdate: (id: number, changes: Partial<Todos>) => Promise<void>;
-  fetchTodos: () => Promise<void>
+  fetchTodos: () => Promise<void>;
 }
 
 export const useFormStore = create<FormState>((set, get) => ({
@@ -42,10 +42,10 @@ export const useFormStore = create<FormState>((set, get) => ({
       const data = await getData();
       set({ todos: data });
     } catch (err) {
-      get().handleError(err, "Erreur de chargement");
+      get().handleError(err, 'Erreur de chargement');
     }
   },
-  
+
   // Handler
   handleRemove: async (id: number) => {
     const { setError, todos, setTodos, handleError } = get();
