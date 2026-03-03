@@ -127,9 +127,7 @@ export const useFormStore = create<FormState>((set, get) => ({
       if (!currentTodo) return;
 
       const updatedTodo = { ...currentTodo, ...changes };
-      const { id: _, ...dataForApi } = updatedTodo;
-
-      await patchData(dataForApi, id);
+      await patchData(updatedTodo, id);
 
       setTodos(todos.map((t) => (t.id === id ? updatedTodo : t)));
     } catch (err) {
