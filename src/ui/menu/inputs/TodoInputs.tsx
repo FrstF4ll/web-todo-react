@@ -1,7 +1,6 @@
 import type { ChangeEventHandler } from 'react';
 
 interface TodoInputProps {
-  type?: string;
   placeholder?: string;
   name: string;
   value: string;
