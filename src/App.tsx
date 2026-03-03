@@ -6,24 +6,20 @@ import { AddTodoButton } from './ui/menu/inputs/AddTodoButton';
 import { TodoForm } from './ui/menu/inputs/TodoForm';
 import { TodoInputs } from './ui/menu/inputs/TodoInputs';
 import { TodoTextarea } from './ui/menu/inputs/TodoTextarea';
-import { getData } from './api/GetData';
 import type { Todos } from './shared/Interfaces';
 import { TodoWrapper } from './ui/todos/items/TodoWrapper';
 import { StatusMessage } from './ui/other/message/StatusMessage';
 import mainMenuStyles from './ui/menu/MainMenu.module.css';
 import { ErrorMessage } from './ui/other/message/ErrorMessage';
-import { useEffect } from 'react';
 import { useFormStore } from './useFormStore';
 import { useFilterStore } from './useFilterStore';
 import { useShallow } from 'zustand/shallow';
-
-const todosPromise = getData();
+import { useEffect } from 'react';
 
 const App = () => {
   const formData = useFormStore((s) => s.formData);
   const handleInputChange = useFormStore((s) => s.handleInputChange);
   const handleAdd = useFormStore((s) => s.handleAdd);
-  const setTodos = useFormStore((s) => s.setTodos);
   const todos = useFormStore((s) => s.todos);
   const handleRemove = useFormStore((s) => s.handleRemove);
   const handleUpdate = useFormStore((s) => s.handleUpdate);
@@ -32,20 +28,15 @@ const App = () => {
   const filteredTodos = useFilterStore(
     useShallow((state) => state.filterTodos(todos)),
   );
+  const fetchTodos = useFormStore((s) => s.fetchTodos);
   const getOptionClassName = useFilterStore((s) => s.getOptionClassName);
   const sorting = useFilterStore((s) => s.sorting);
   const setSorting = useFilterStore((s) => s.setSorting);
   const handleRemoveAll = useFormStore((s) => s.handleRemoveAll);
 
-  useEffect(() => {
-    todosPromise
-      .then((data) => {
-        setTodos(data);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  }, []);
+useEffect(() => {
+  fetchTodos();
+}, [fetchTodos]);
 
   return (
     <main>
