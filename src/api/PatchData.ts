@@ -1,13 +1,14 @@
 import type { ClientTodos } from '../shared/Interfaces';
 import { TODO_URL } from '../shared/variable';
 import { apiHandleError } from './apiHandleError';
+import { type Todos } from '../shared/Interfaces';
 
 export async function patchData(
-  todo: ClientTodos,
+  todo: Partial<Todos>,
   id: number,
 ): Promise<ClientTodos> {
   try {
-    const completeURL = `${TODO_URL}?id=eq.${id}`;
+    const completeURL = `${TODO_URL}/${id}`;
 
     const response = await fetch(completeURL, {
       method: 'PATCH',

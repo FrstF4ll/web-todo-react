@@ -1,4 +1,4 @@
-export const TODO_URL = 'https://api.todos.in.jt-lab.ch:443/todos';
+export const TODO_URL = 'http://localhost:3000/todos';
 
 export const FILTER = {
   ANY: 'Any',

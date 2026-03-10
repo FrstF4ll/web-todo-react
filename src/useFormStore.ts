@@ -139,7 +139,7 @@ export const useFormStore = create<FormState>((set, get) => ({
       if (!currentTodo) return;
 
       const updatedTodo = { ...currentTodo, ...changes };
-      await patchData(updatedTodo, id);
+      await patchData(changes, id);
 
       setTodos(todos.map((t) => (t.id === id ? updatedTodo : t)));
     } catch (err) {
